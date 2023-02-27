@@ -1,0 +1,16 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://1.15.62.89:3306/stu_analysis_system?serverTimezone=UTC
+    username: root
+    password: 256817
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#mybatis-plus:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath*:/xml/*Mapper.xml
