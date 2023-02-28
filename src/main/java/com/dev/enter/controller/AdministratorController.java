@@ -33,9 +33,17 @@ public class AdministratorController {
     @GetMapping("/getAllAdministrator/{id}")
     public Result<AdministratorEntity> getAllAdministrator(@PathVariable String id){
         Result<AdministratorEntity> result = new Result<>();
-        result.setData(administratorService.getAllAdministrator(id));
-        result.setMessage("成功");
-        result.setCode(200);
+        if (administratorService.getAllAdministrator(id)==null){
+            result.setCode(404);
+            result.setMessage("失败");
+            result.setStatus(false);
+            result.setMessage(null);
+        }else {
+            result.setData(administratorService.getAllAdministrator(id));
+            result.setMessage("成功");
+            result.setCode(200);
+            result.setStatus(true);
+        }
         return result;
     }
 

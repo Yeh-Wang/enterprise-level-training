@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class Result<T> {
     private String message;
-    private String status;
+    private boolean status;
     private int code;
     private T data;
 }

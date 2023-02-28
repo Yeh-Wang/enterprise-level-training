@@ -1,24 +1,19 @@
 # Get
 
 ***
-Get/administrator-entity/getAllAdministrator
+Get/administrator-entity/getAllAdministrator/{{id}}  
+## 通过管理员id获取管理员信息
+>参数说明
 
-|名称|类型|必选| 说明                      |
-|---|---|---|-------------------------|
-|id|string|---| 管路员id                   |
-|user_name|string|---| 管理员用户名                  |
-|real_name|string|---| 管理用姓名                   |
-|age|int|---| 年龄                      |
-|telephone|string|---| 电话                      |
-|user_pwd|string|---| 密码                      |
-|sexy|string|---| 性别                      |
-|user_type|int|---| 用户类型（1表示超级管理员，0表示普通管理员） |  
+| 名称  | 类型      | 必选    | 说明    |
+|-----|---------|-------|-------|
+| id  | String  | true  | 管理员ID |  
   
 > 返回示例  
   
 ```
 {"message":"成功",
-"status":null,
+"status":true,
 "code":200,
 "data":
        {
