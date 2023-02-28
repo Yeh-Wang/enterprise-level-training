@@ -9,8 +9,8 @@ spring:
     password: 256817
     type: com.alibaba.druid.pool.DruidDataSource
 
-#mybatis-plus:
-#  configuration:
-#    map-underscore-to-camel-case: true
-#  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#  mapper-locations: classpath*:/xml/*Mapper.xml
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/xml/*Mapper.xml
