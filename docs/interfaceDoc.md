@@ -1,8 +1,9 @@
-# Get
-
+# 管理员信息  
+***
+## Get
 ***
 Get/administrator-entity/getAllAdministrator/{{id}}  
-## 通过管理员id获取管理员信息
+#### 通过管理员id获取管理员信息
 >参数说明
 
 | 名称  | 类型      | 必选    | 说明    |
