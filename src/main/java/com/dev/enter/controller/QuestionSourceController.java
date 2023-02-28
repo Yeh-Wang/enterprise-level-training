@@ -1,6 +1,7 @@
 package com.dev.enter.controller;
 
 import com.dev.enter.entity.QuestionSourceEntity;
+import com.dev.enter.entity.Result;
 import com.dev.enter.service.impl.QuestionSourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,9 @@ public class QuestionSourceController {
     @ResponseBody
     @GetMapping("/getAllQuestion")
     List<QuestionSourceEntity> getAllQuestion(){
+
+        Result<List<QuestionSourceEntity>> result = new Result<>();
+        result.setData(questionSourceService.getAllQuestion());
         return null;
     }
 
