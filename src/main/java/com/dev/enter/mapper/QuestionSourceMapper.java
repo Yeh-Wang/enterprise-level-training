@@ -3,6 +3,10 @@ package com.dev.enter.mapper;
 import com.dev.enter.entity.QuestionSourceEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface QuestionSourceMapper extends BaseMapper<QuestionSourceEntity> {
 
+    @Select("select * from question_source where question_type = #{type}")
+    List<QuestionSourceEntity> getQuestionByType(@Param("type") String type);
 }
