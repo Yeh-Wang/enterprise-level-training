@@ -1,6 +1,7 @@
 package com.dev.enter.controller;
 
 import com.dev.enter.entity.AdministratorEntity;
+import com.dev.enter.entity.Result;
 import com.dev.enter.mapper.AdministratorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +21,18 @@ import java.util.List;
 @RequestMapping("/administrator-entity")
 public class AdministratorController {
 
+    private AdministratorMapper administratorMapper;
+
     @Autowired
-    AdministratorMapper administratorMapper;
+    public void setAdministratorMapper(AdministratorMapper administratorMapper){
+        this.administratorMapper=administratorMapper;
+    }
+
     @GetMapping("/getAllAdministrator")
-    public List<AdministratorEntity> getAllAdministrator(){
-        return administratorMapper.selectList(null);
+    public Result<AdministratorEntity> getAllAdministrator(){
+        Result<AdministratorEntity> result = new Result<AdministratorEntity>();
+        result.setData(administratorMapper.selectOne(null));
+        return result;
     }
 
 }
