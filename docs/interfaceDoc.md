@@ -14,9 +14,9 @@ Get /question-source-entity/getAllQuestion
 | code    | int                        | --- | 状态码     |
 | data    | List(QuestionSourceEntity) | --- | 所有问题信息  |
 
-# 管理员信息
+## 管理员信息
 ***
-## Get
+### Get
 ***
 Get/administrator-entity/getAllAdministrator/{{id}}
 
