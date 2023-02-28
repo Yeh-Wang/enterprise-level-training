@@ -14,7 +14,7 @@ Get/administrator-entity/getAllAdministrator
 |sexy|string|---| 性别                      |
 |user_type|int|---| 用户类型（1表示超级管理员，0表示普通管理员） |  
   
->> 返回示例  
+> 返回示例  
   
 ```
 {"message":"成功",
