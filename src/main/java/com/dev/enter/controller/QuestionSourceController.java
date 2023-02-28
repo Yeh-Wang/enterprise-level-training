@@ -4,12 +4,10 @@ import com.dev.enter.entity.QuestionSourceEntity;
 import com.dev.enter.entity.Result;
 import com.dev.enter.service.impl.QuestionSourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -34,30 +32,107 @@ public class QuestionSourceController {
      */
     @ResponseBody
     @GetMapping("/getAllQuestion")
-    List<QuestionSourceEntity> getAllQuestion(){
-
+    Result<List<QuestionSourceEntity>> getAllQuestion(){
         Result<List<QuestionSourceEntity>> result = new Result<>();
-        result.setData(questionSourceService.getAllQuestion());
-        return null;
+        List<QuestionSourceEntity> list = questionSourceService.getAllQuestion();
+        if(list.size()!=0){
+            result.setData(list);
+            result.setCode(200);
+            result.setMessage("OK");
+            result.setStatus(true);
+        }else{
+            result.setData(list);
+            result.setCode(404);
+            result.setMessage("fail");
+            result.setStatus(false);
+        }
+        return result;
     }
 
     /**
      * 根据问题类型获取问题
      */
-    List<QuestionSourceEntity> getQuestionByType(String type);
+    @ResponseBody
+    @GetMapping("/getQuestionByType/{type}")
+    Result<List<QuestionSourceEntity>> getQuestionByType(@PathVariable String type){
+        Result<List<QuestionSourceEntity>> result = new Result<>();
+        List<QuestionSourceEntity> list = questionSourceService.getQuestionByType(type);
+        if(list.size()!=0){
+            result.setData(list);
+            result.setCode(200);
+            result.setMessage("OK");
+            result.setStatus(true);
+        }else{
+            result.setData(list);
+            result.setCode(404);
+            result.setMessage("fail");
+            result.setStatus(false);
+        }
+        return result;
+    }
 
     /**
      * 添加一个问题信息
      */
-    Integer addQuestion(QuestionSourceEntity questionSourceEntity);
+    @ResponseBody
+    @PostMapping("/addQuestion")
+    Result<String> addQuestion(@RequestBody QuestionSourceEntity questionSourceEntity){
+        Result<String> result = new Result<>();
+        String id = UUID.randomUUID().toString();
+        questionSourceEntity.setId(id);
+        if(questionSourceService.addQuestion(questionSourceEntity)==1){
+            result.setData("Add successfully");
+            result.setCode(200);
+            result.setMessage("OK");
+            result.setStatus(true);
+        }else{
+            result.setData("All failed");
+            result.setCode(404);
+            result.setMessage("fail");
+            result.setStatus(false);
+        }
+        return result;
+    }
 
     /**
      * 更新一个问题信息
      */
-    Integer updateQuestion(QuestionSourceEntity questionSourceEntity);
+    @ResponseBody
+    @PostMapping("/updateQuestion")
+    Result<String> updateQuestion(@RequestBody QuestionSourceEntity questionSourceEntity){
+        Result<String> result = new Result<>();
+        if(questionSourceService.updateQuestion(questionSourceEntity)==1){
+            result.setData("Update successfully");
+            result.setCode(200);
+            result.setMessage("OK");
+            result.setStatus(true);
+        }else{
+            result.setData("Update failed");
+            result.setCode(404);
+            result.setMessage("fail");
+            result.setStatus(false);
+        }
+        return result;
+    }
 
     /**
      * 删除一个问题信息通过编号
      */
-    Integer deleteQuestionById(int id);
+    @ResponseBody
+    @PostMapping("/deleteQuestionById/{id}")
+    Result<String> deleteQuestionById(@PathVariable int id){
+        Result<String> result = new Result<>();
+        if(questionSourceService.deleteQuestionById(id)==1){
+            result.setData("Delete successfully");
+            result.setCode(200);
+            result.setMessage("OK");
+            result.setStatus(true);
+        }else{
+            result.setData("Delete failed");
+            result.setCode(404);
+            result.setMessage("fail");
+            result.setStatus(false);
+        }
+        return result;
+    }
 }
