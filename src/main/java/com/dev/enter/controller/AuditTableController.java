@@ -1,5 +1,7 @@
 package com.dev.enter.controller;
 
+import com.dev.enter.mapper.AuditTableMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,5 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/audit-table-entity")
 public class AuditTableController {
-
+      @Autowired
+       AuditTableMapper auditTableMapper;
 }

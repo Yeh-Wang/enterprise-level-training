@@ -4,7 +4,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author :Yaxin-Wang
+ *
  * @date : 2022/11/26
  */
 @Configuration
