@@ -11,5 +11,4 @@ public class EnterLevelSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(EnterLevelSystemApplication.class, args);
     }
-
 }
