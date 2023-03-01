@@ -520,7 +520,7 @@ post   /question-source-entity/deleteQuestion/{id}
 ***
 ### Get
 ***
-Get/administrator-entity/getAdministratorById/{{id}}
+Get/administrator-entity/getAdministratorById/{id}
 
 #### 通过管理员id获取管理员信息
 
@@ -561,7 +561,7 @@ Get/administrator-entity/getAdministratorById/{{id}}
 ```  
 
 ***  
-Post/administrator-entity/login
+Get/administrator-entity/login/{user_name},{password}
 #### 用户登录验证，用户名密码正确后返回token验证密钥
 > 请求参数
 
