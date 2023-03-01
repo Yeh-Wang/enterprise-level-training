@@ -54,15 +54,21 @@ public class AdministratorController {
      * 登录验证
      */
     @ResponseBody
-    @PostMapping("/login")
-    public Result<String> login(@RequestBody AdministratorEntity administrator){
-        System.out.println(administrator.getRealName());
-        String token = JWTUtils.sign(administrator);
+    @GetMapping("/login/{id},{password}")
+    public Result<String> login(@PathVariable String id, @PathVariable String password){
         Result<String> result = new Result<>();
-        result.setData(token);
-        result.setCode(200);
-        result.setMessage("OK");
-        result.setStatus(true);
+        if (administratorService.checkLogin(id,password)!=null){
+            String token = JWTUtils.sign(administratorService.checkLogin(id,password));
+            result.setData(token);
+            result.setCode(200);
+            result.setMessage("OK");
+            result.setStatus(true);
+        }else {
+            result.setData(null);
+            result.setCode(404);
+            result.setMessage("用户名或密码不正确");
+            result.setStatus(false);
+        }
         return result;
     }
 
