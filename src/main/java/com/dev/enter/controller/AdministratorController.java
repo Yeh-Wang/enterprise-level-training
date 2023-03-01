@@ -4,11 +4,9 @@ import com.dev.enter.entity.AdministratorEntity;
 import com.dev.enter.entity.Result;
 import com.dev.enter.mapper.AdministratorMapper;
 import com.dev.enter.service.AdministratorService;
+import com.dev.enter.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,20 +33,36 @@ public class AdministratorController {
      * @param id 管理员id
      * @return result类
      */
-    @GetMapping("/getAllAdministrator/{id}")
-    public Result<AdministratorEntity> getAllAdministrator(@PathVariable String id){
+    @GetMapping("/getAdministratorById/{id}")
+    public Result<AdministratorEntity> getAdministratorById(@PathVariable String id){
         Result<AdministratorEntity> result = new Result<>();
-        if (administratorService.getAllAdministrator(id)==null){
+        if (administratorService.getAdministratorById(id)==null){
             result.setCode(404);
             result.setMessage("失败");
             result.setStatus(false);
             result.setMessage(null);
         }else {
-            result.setData(administratorService.getAllAdministrator(id));
+            result.setData(administratorService.getAdministratorById(id));
             result.setMessage("成功");
             result.setCode(200);
             result.setStatus(true);
         }
+        return result;
+    }
+
+    /**
+     * 登录验证
+     */
+    @ResponseBody
+    @PostMapping("/login")
+    public Result<String> login(@RequestBody AdministratorEntity administrator){
+        System.out.println(administrator.getRealName());
+        String token = JWTUtils.sign(administrator);
+        Result<String> result = new Result<>();
+        result.setData(token);
+        result.setCode(200);
+        result.setMessage("OK");
+        result.setStatus(true);
         return result;
     }
 
