@@ -22,4 +22,5 @@ public interface StudentInfoService extends IService<StudentInfoEntity> {
      int  deleteStudentById(@PathVariable String stuId);
      int updateStudent(@RequestBody StudentInfoEntity studentInfo);
      int insertStudentInfo(@RequestBody StudentInfoEntity studentInfo);
+     int judgeStuNumber(@PathVariable String stuNumber);
 }

@@ -56,4 +56,16 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
     public int insertStudentInfo(StudentInfoEntity studentInfo) {
         return  studentInfoMapper.insert(studentInfo);
     }
+
+    @Override
+    public int judgeStuNumber(String stuNumber) {
+        StudentInfoEntity studentInfo;
+        studentInfo=studentInfoMapper.selectOne(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getStuNumber,stuNumber));
+        if (studentInfo!= null){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 }
