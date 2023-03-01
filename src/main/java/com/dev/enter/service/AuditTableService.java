@@ -2,7 +2,6 @@ package com.dev.enter.service;
 
 import com.dev.enter.entity.AuditTableEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**

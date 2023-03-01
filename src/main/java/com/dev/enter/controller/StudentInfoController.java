@@ -30,7 +30,6 @@ public class StudentInfoController {
     /**
      * 通过学号精准查找学员的信息
      *
-     * @param stuNumber
      * @return 返回查找学员的所有信息
      */
     @ResponseBody
@@ -54,7 +53,6 @@ public class StudentInfoController {
     /**
      * 通过学生姓名模糊查找学员
      *
-     * @param stuName
      * @return 查找学员的全部信息
      */
     @GetMapping("/findStudentByStuName/{stuName}")
@@ -93,7 +91,6 @@ public class StudentInfoController {
     /**
      * 通过学生的学生id删除学生信息
      *
-     * @param stuId
      * @return 成功返回 result.Data为1
      */
     @GetMapping("/deleteStudentById/{stuId}")
@@ -116,8 +113,6 @@ public class StudentInfoController {
     /**
      * 更新学生的信息
      *
-     * @param studentInfo
-     * @return
      */
     @PostMapping("/updateStudent")
     Result<Integer> updateStudent(@RequestBody StudentInfoEntity studentInfo) {

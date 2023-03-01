@@ -2,13 +2,11 @@ package com.dev.enter.controller;
 
 import com.dev.enter.entity.AdministratorEntity;
 import com.dev.enter.entity.Result;
-import com.dev.enter.mapper.AdministratorMapper;
 import com.dev.enter.service.AdministratorService;
 import com.dev.enter.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * <p>
