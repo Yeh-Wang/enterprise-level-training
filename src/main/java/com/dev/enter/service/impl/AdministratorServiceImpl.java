@@ -30,4 +30,15 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
         return administratorMapper.selectById(id);
     }
 
+    private AdministratorMapper administratorMapper;
+
+    @Autowired
+    public void setAdministratorMapper(AdministratorMapper administratorMapper){
+        this.administratorMapper=administratorMapper;
+    }
+
+    @Override
+    public AdministratorEntity getAdministratorById(String id) {
+        return administratorMapper.selectById(id);
+    }
 }
