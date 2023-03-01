@@ -1,5 +1,6 @@
 package com.dev.enter.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dev.enter.entity.AdministratorEntity;
 import com.dev.enter.mapper.AdministratorMapper;
 import com.dev.enter.service.AdministratorService;
@@ -27,5 +28,15 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
     @Override
     public AdministratorEntity getAdministratorById(String id) {
         return administratorMapper.selectById(id);
+    }
+
+    @Override
+    public AdministratorEntity checkLogin(String id, String password) {
+        AdministratorEntity administratorEntity = administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().eq("id",id).eq("user_pwd",password));
+        if (administratorEntity.getId()==""){
+            return null;
+        }else {
+            return administratorEntity;
+        }
     }
 }

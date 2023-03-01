@@ -18,5 +18,6 @@ public interface AdministratorService extends IService<AdministratorEntity> {
     /**
      * 登陆验证
      */
+    AdministratorEntity checkLogin(String id,String password);
 
 }

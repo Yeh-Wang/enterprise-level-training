@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- *
+ * @author :Yaxin-Wang
  * @date : 2022/11/26
  */
 @Configuration
@@ -40,7 +40,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
-                .addPathPatterns("/administrator-entity/**")
+                .addPathPatterns("/administrator-entity/getAdministratorById/**")
                 .excludePathPatterns("/administrator-entity/login");
     }
 }
