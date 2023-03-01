@@ -30,6 +30,11 @@ public class AdministratorController {
         this.administratorService=administratorService;
     }
 
+    /**
+     * 通过管理员id获取该管理员的信息
+     * @param id 管理员id
+     * @return result类
+     */
     @GetMapping("/getAllAdministrator/{id}")
     public Result<AdministratorEntity> getAllAdministrator(@PathVariable String id){
         Result<AdministratorEntity> result = new Result<>();
