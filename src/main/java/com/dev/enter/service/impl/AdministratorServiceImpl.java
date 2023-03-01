@@ -4,6 +4,7 @@ import com.dev.enter.entity.AdministratorEntity;
 import com.dev.enter.mapper.AdministratorMapper;
 import com.dev.enter.service.AdministratorService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,4 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, AdministratorEntity> implements AdministratorService {
 
+    private AdministratorMapper administratorMapper;
+
+    @Autowired
+    public void setAdministratorMapper(AdministratorMapper administratorMapper){
+        this.administratorMapper=administratorMapper;
+    }
+
+    @Override
+    public AdministratorEntity getAdministratorById(String id) {
+        return administratorMapper.selectById(id);
+    }
 }
