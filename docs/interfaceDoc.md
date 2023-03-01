@@ -565,9 +565,10 @@ Post/administrator-entity/login
 #### 用户登录验证，用户名密码正确后返回token验证密钥
 > 请求参数
 
-| 名称            | 类型                  | 必选   | 说明       |
-|---------------|---------------------|------|----------|
-| administrator | AdministratorEntity | true | 管理员信息实体类 |  
+| 名称        | 类型     | 必选   | 说明     |
+|-----------|--------|------|--------|
+| user_name | String | true | 管理员用户名 |
+| password  | String | true | 密码     |
 > 返回数据结构
 
 | 名称      | 类型     | 必选  | 说明         |
