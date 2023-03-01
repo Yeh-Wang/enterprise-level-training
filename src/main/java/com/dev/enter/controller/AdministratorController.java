@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @since 2023-02-28 10:59:36
@@ -24,24 +24,25 @@ public class AdministratorController {
     private AdministratorService administratorService;
 
     @Autowired
-    public void setAdministratorService(AdministratorService administratorService){
-        this.administratorService=administratorService;
+    public void setAdministratorService(AdministratorService administratorService) {
+        this.administratorService = administratorService;
     }
 
     /**
      * 通过管理员id获取该管理员的信息
+     *
      * @param id 管理员id
      * @return result类
      */
     @GetMapping("/getAdministratorById/{id}")
-    public Result<AdministratorEntity> getAdministratorById(@PathVariable String id){
+    public Result<AdministratorEntity> getAdministratorById(@PathVariable String id) {
         Result<AdministratorEntity> result = new Result<>();
-        if (administratorService.getAdministratorById(id)==null){
+        if (administratorService.getAdministratorById(id) == null) {
             result.setCode(404);
             result.setMessage("失败");
             result.setStatus(false);
             result.setMessage(null);
-        }else {
+        } else {
             result.setData(administratorService.getAdministratorById(id));
             result.setMessage("成功");
             result.setCode(200);
@@ -55,7 +56,7 @@ public class AdministratorController {
      */
     @ResponseBody
     @PostMapping("/login")
-    public Result<String> login(@RequestBody AdministratorEntity administrator){
+    public Result<String> login(@RequestBody AdministratorEntity administrator) {
         System.out.println(administrator.getRealName());
         String token = JWTUtils.sign(administrator);
         Result<String> result = new Result<>();

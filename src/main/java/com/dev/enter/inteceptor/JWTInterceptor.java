@@ -20,18 +20,18 @@ public class JWTInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 //这里一定不要忘了设置OPTIONS这个跨域请求，第一个请求一般不带token，然后会发起第二次请求带token
-        if(HttpMethod.OPTIONS.toString().equals(request.getMethod())){
+        if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
 //            System.out.println("跨域的第一次 OPTIONS 放行");
             return true;
         }
 //        从请求头中获取token
         String token = request.getHeader("token");
 //        判断token是否正确
-        if(token == null || token.equals("token")){
+        if (token == null || token.equals("token")) {
             return false;
         }
 //        解析token
-        if(!JWTUtils.verify(token)){
+        if (!JWTUtils.verify(token)) {
             return false;
         }
         return true;
