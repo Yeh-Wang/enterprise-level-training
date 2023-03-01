@@ -24,7 +24,6 @@ public class JWTInterceptor implements HandlerInterceptor {
 //            System.out.println("跨域的第一次 OPTIONS 放行");
             return true;
         }
-//        System.out.println("拦截了 manage");
 //        从请求头中获取token
         String token = request.getHeader("token");
 //        判断token是否正确
