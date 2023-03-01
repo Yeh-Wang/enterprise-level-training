@@ -34,13 +34,13 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
     }
 
     @Override
-    public AdministratorEntity checkLogin(String id, String password) {
+    public AdministratorEntity checkLogin(String username, String password) {
         if (administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().
-                eq("id", id).eq("user_pwd", password)) == null) {
+                eq("user_name", username).eq("user_pwd", password)) == null) {
             return null;
         } else {
             return administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().
-                    eq("id", id).eq("user_pwd", password));
+                    eq("user_name", username).eq("user_pwd", password));
         }
     }
 }

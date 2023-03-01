@@ -52,17 +52,17 @@ public class AdministratorController {
 
     /**
      * 登录验证
-     * @param id 管理员id
+     * @param username 管理员id
      * @param password 管理员密码
      * @return token
      */
 
     @ResponseBody
-    @GetMapping("/login/{id},{password}")
-    public Result<String> login(@PathVariable String id, @PathVariable String password){
+    @GetMapping("/login/{username},{password}")
+    public Result<String> login(@PathVariable String username, @PathVariable String password){
         Result<String> result = new Result<>();
-        if (administratorService.checkLogin(id,password)!=null){
-            String token = JWTUtils.sign(administratorService.checkLogin(id,password));
+        if (administratorService.checkLogin(username,password)!=null){
+            String token = JWTUtils.sign(administratorService.checkLogin(username,password));
             result.setData(token);
             result.setCode(200);
             result.setMessage("OK");
