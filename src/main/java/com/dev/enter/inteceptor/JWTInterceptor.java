@@ -31,8 +31,6 @@ public class JWTInterceptor implements HandlerInterceptor {
         if(token == null || token.equals("token")){
             return false;
         }
-        System.out.println("1111111111111111111111111111111111111111111111");
-        System.out.println(token);
 //        解析token
         if(!JWTUtils.verify(token)){
             return false;

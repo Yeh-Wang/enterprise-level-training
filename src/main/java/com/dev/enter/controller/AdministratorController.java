@@ -52,7 +52,11 @@ public class AdministratorController {
 
     /**
      * 登录验证
+     * @param id 管理员id
+     * @param password 管理员密码
+     * @return token
      */
+
     @ResponseBody
     @GetMapping("/login/{id},{password}")
     public Result<String> login(@PathVariable String id, @PathVariable String password){

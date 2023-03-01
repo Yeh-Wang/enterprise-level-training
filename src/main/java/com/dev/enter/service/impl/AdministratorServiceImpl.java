@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @since 2023-02-28 10:59:36
@@ -24,8 +24,8 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
     private AdministratorMapper administratorMapper;
 
     @Autowired
-    public void setAdministratorMapper(AdministratorMapper administratorMapper){
-        this.administratorMapper=administratorMapper;
+    public void setAdministratorMapper(AdministratorMapper administratorMapper) {
+        this.administratorMapper = administratorMapper;
     }
 
     @Override
@@ -35,11 +35,12 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
 
     @Override
     public AdministratorEntity checkLogin(String id, String password) {
-        AdministratorEntity administratorEntity = administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().eq("id",id).eq("user_pwd",password));
-        if (administratorEntity.getId()==""){
+        if (administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().
+                eq("id", id).eq("user_pwd", password)) == null) {
             return null;
-        }else {
-            return administratorEntity;
+        } else {
+            return administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().
+                    eq("id", id).eq("user_pwd", password));
         }
     }
 }
