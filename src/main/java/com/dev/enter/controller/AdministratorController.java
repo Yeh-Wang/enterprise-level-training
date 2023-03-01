@@ -30,19 +30,19 @@ public class AdministratorController {
 
     /**
      * 通过管理员id获取该管理员的信息
-     * @param id 管理员id
+     * @param username 管理员user_name
      * @return result类
      */
-    @GetMapping("/getAdministratorById/{id}")
-    public Result<AdministratorEntity> getAdministratorById(@PathVariable String id){
+    @GetMapping("/getAdministratorByUsername/{username}")
+    public Result<AdministratorEntity> getAdministratorByUsername(@PathVariable String username){
         Result<AdministratorEntity> result = new Result<>();
-        if (administratorService.getAdministratorById(id)==null){
+        if (administratorService.getAdministratorByUsername(username)==null){
             result.setCode(404);
             result.setMessage("失败");
             result.setStatus(false);
             result.setMessage(null);
         }else {
-            result.setData(administratorService.getAdministratorById(id));
+            result.setData(administratorService.getAdministratorByUsername(username));
             result.setMessage("成功");
             result.setCode(200);
             result.setStatus(true);

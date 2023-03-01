@@ -26,8 +26,8 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
     }
 
     @Override
-    public AdministratorEntity getAdministratorById(String id) {
-        return administratorMapper.selectById(id);
+    public AdministratorEntity getAdministratorByUsername(String username) {
+        return administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().eq("user_name",username));
     }
 
     @Override
