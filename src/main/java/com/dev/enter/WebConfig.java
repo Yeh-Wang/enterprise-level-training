@@ -40,7 +40,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
-                .addPathPatterns("/administrator-entity/getAdministratorById/**")
+                .addPathPatterns("/administrator-entity/getAdministratorByUsername/**")
                 .excludePathPatterns("/administrator-entity/login");
     }
 }
