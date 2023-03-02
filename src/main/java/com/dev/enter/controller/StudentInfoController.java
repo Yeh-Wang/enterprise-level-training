@@ -77,7 +77,8 @@ public class StudentInfoController {
      *
      * @return 所有学生的所有信息
      */
-    @PostMapping("/getAllStudentInfo")
+    @ResponseBody
+    @GetMapping("/getAllStudentInfo")
     Result<List<StudentInfoEntity>> getAllStudentInfo() {
         Result<List<StudentInfoEntity>> result = new Result<>();
 
