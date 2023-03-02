@@ -595,7 +595,7 @@ Post/administrator-entity/register
 | message | String | --- | 注册提示信息 |
 | status  | Bool   | --- | 成功与否   |
 | code    | int    | --- | 状态码    |
-| data    | null   | --- | ---    |  
+| data    | string | --- | ---    |  
 
 > 返回示例
 
@@ -604,9 +604,47 @@ Post/administrator-entity/register
 	"message": "注册成功",
 	"status": true,
 	"code": 200,
-	"data": null
+	"data": "1"
 }
 ```  
+用户名被占用
+```json
+{
+	"message": "用户名已被占用",
+	"status": false,
+	"code": 404,
+	"data": "0"
+}
+```  
+***  
+Post/administrator-entity/modifyAdministratorInfo
+#### 修改管理员信息  
+> 请求参数
+
+| 名称            | 类型                  | 必选   | 说明         |
+|---------------|---------------------|------|------------|
+| administrator | AdministratorEntity | true | 一个管理员信息实体类 |    
+    
+> 返回数据结构 
+
+| 名称      | 类型     | 必选  | 说明     |
+|---------|--------|-----|--------|
+| message | String | --- | 注册提示信息 |
+| status  | Bool   | --- | 成功与否   |
+| code    | int    | --- | 状态码    |
+| data    | string | --- | ---    |    
+
+> 返回示例  
+
+```json
+{
+  "message": "修改成功",
+  "status": true,
+  "code": 200,
+  "data": "1"
+}
+``` 
+  
 
 ## 申请审核表
 
