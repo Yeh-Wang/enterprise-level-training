@@ -52,7 +52,7 @@ public class AdministratorController {
 
     /**
      * 登录验证
-     * @param username 管理员id
+     * @param username 管理员用户名
      * @param password 管理员密码
      * @return token
      */

@@ -55,6 +55,7 @@ public class StudentInfoController {
      *
      * @return 查找学员的全部信息
      */
+    @ResponseBody
     @GetMapping("/findStudentByStuName/{stuName}")
     Result<List<StudentInfoEntity>> findStudentBuStuName(@PathVariable String stuName) {
         Result<List<StudentInfoEntity>> result = new Result<>();
@@ -78,7 +79,7 @@ public class StudentInfoController {
      * @return 所有学生的所有信息
      */
     @ResponseBody
-    @GetMapping("/getAllStudentInfo")
+    @PostMapping("/getAllStudentInfo")
     Result<List<StudentInfoEntity>> getAllStudentInfo() {
         Result<List<StudentInfoEntity>> result = new Result<>();
 
@@ -94,6 +95,7 @@ public class StudentInfoController {
      *
      * @return 成功返回 result.Data为1
      */
+    @ResponseBody
     @GetMapping("/deleteStudentById/{stuId}")
     Result<Integer> deleteStudentById(@PathVariable String stuId) {
         Result<Integer> result = new Result<>();
@@ -115,6 +117,7 @@ public class StudentInfoController {
      * 更新学生的信息
      *
      */
+    @ResponseBody
     @PostMapping("/updateStudent")
     Result<Integer> updateStudent(@RequestBody StudentInfoEntity studentInfo) {
         Result<Integer> result = new Result<>();
@@ -132,6 +135,7 @@ public class StudentInfoController {
         return result;
     }
 
+    @ResponseBody
     @PostMapping("/insertStudentInfo")
     Result<Integer> insertStudentInfo(@RequestBody StudentInfoEntity studentInfo) {
         UUID uuid = UUID.randomUUID();

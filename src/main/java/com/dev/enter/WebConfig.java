@@ -41,7 +41,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
                 .addPathPatterns("/administrator-entity/getAdministratorByUsername/**")
-                .excludePathPatterns("/administrator-entity/login")
-                .excludePathPatterns("/student-info-entity/getAllStudentInfo");
+                .excludePathPatterns("/administrator-entity/login");
     }
 }
