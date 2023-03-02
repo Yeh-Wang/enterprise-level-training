@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -78,7 +79,8 @@ public class StudentInfoController {
      * 得到所有的学生的所有信息
      * @return 所有学生的所有信息
      */
-    @PostMapping ("/getAllStudentInfo")
+    @ResponseBody
+    @GetMapping ("/getAllStudentInfo")
       Result<List<StudentInfoEntity>> getAllStudentInfo (){
           Result<List<StudentInfoEntity>> result = new Result<>();
 
@@ -94,6 +96,7 @@ public class StudentInfoController {
      * @param stuId
      * @return 成功返回 result.Data为1
      */
+    @ResponseBody
     @GetMapping ("/deleteStudentById/{stuId}")
       Result<Integer>  deleteStudentById(@PathVariable String stuId){
         Result<Integer> result = new Result<>();
@@ -117,6 +120,7 @@ public class StudentInfoController {
      * @param studentInfo
      * @return
      */
+    @ResponseBody
     @PostMapping ("/updateStudent")
       Result<Integer> updateStudent(@RequestBody StudentInfoEntity studentInfo){
           Result<Integer> result = new Result<>();
@@ -134,13 +138,15 @@ public class StudentInfoController {
           }
            return result;
     }
+    @ResponseBody
     @PostMapping("/insertStudentInfo")
      Result<Integer> insertStudentInfo(@RequestBody StudentInfoEntity studentInfo){
+
         UUID uuid = UUID.randomUUID();
         studentInfo.setStuId(String.valueOf(uuid));
         studentInfo.setPermissions(0);
         Result<Integer> result = new Result<>();
-        if (studentInfo.getStuName() == null)
+        if (Objects.equals(studentInfo.getStuName(), ""))
         {
             result.setData(0);
             result.setCode(401);
@@ -148,14 +154,15 @@ public class StudentInfoController {
             result.setMessage("名字不能为空");
             return  result;
         }
-        if (studentInfo.getStuNumber()== null){
+
+        if (studentInfo.getStuNumber().equals("")){
             result.setData(0);
             result.setCode(401);
             result.setStatus(false);
             result.setMessage("学号不能为空");
             return  result;
         }
-        if (studentInfo.getTelephone()== null){
+        if (Objects.equals(studentInfo.getTelephone(), "")){
             result.setData(0);
             result.setCode(401);
             result.setStatus(false);

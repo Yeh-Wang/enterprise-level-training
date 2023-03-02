@@ -1,8 +1,8 @@
 # 学员
 
-## Post 查找所有的学员信息
+## Get 查找所有的学员信息
 
-### post /student-info-entity/getAllStudentInfo
+### Get /student-info-entity/getAllStudentInfo
 
 请求头
 
