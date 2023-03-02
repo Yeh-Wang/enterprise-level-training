@@ -40,4 +40,9 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
                     eq("user_name", username).eq("user_pwd", password));
         }
     }
+
+    @Override
+    public int register(AdministratorEntity administratorEntity) {
+        return administratorMapper.insert(administratorEntity);
+    }
 }
