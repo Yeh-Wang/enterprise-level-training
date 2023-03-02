@@ -20,4 +20,6 @@ public interface AdministratorService extends IService<AdministratorEntity> {
      */
     AdministratorEntity checkLogin(String username,String password);
 
+    int register(AdministratorEntity administratorEntity);
+
 }
