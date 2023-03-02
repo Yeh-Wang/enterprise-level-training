@@ -594,4 +594,36 @@ Get/administrator-entity/login/{user_name},{password}
 	"code": 404,
 	"data": null
 }
-```  
+```    
+  
+***  
+  
+Post/administrator-entity/register  
+#### 管理员注册账号,前端返回一个管理员类  
+  
+> 请求参数
+
+| 名称            | 类型                  | 必选   | 说明         |
+|---------------|---------------------|------|------------|
+| administrator | AdministratorEntity | true | 一个管理员信息实体类 |  
+  
+> 返回数据结构  
+
+| 名称      | 类型     | 必选  | 说明     |
+|---------|--------|-----|--------|
+| message | String | --- | 注册提示信息 |
+| status  | Bool   | --- | 成功与否   |
+| code    | int    | --- | 状态码    |
+| data    | null   | --- | ---    |  
+  
+> 返回示例  
+  
+```json
+{
+	"message": "注册成功",
+	"status": true,
+	"code": 200,
+	"data": null
+}
+```
+  
