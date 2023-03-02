@@ -12,4 +12,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface AdministratorService extends IService<AdministratorEntity> {
 
+
+    AdministratorEntity getAdministratorByUsername(String username);
+
+    /**
+     * 登陆验证
+     */
+    AdministratorEntity checkLogin(String username,String password);
+
+    int register(AdministratorEntity administratorEntity);
+
 }
