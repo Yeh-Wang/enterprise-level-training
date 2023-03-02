@@ -34,7 +34,7 @@ public class AuditTableController {
             result.setData(null);
             result.setCode(404);
             result.setStatus(false);
-            result.setMessage("未查找到此表！");
+            result.setMessage("未查找到此信息！");
         }
         return result;
     }
