@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -141,6 +142,47 @@ public class StudentInfoController {
         UUID uuid = UUID.randomUUID();
         studentInfo.setStuId(String.valueOf(uuid));
         studentInfo.setPermissions(0);
+
+
+        if(!Objects.equals(studentInfo.getExecuteAbility(), "")&&studentInfo.getExecuteAbility()!=null){
+            if(Integer.parseInt(studentInfo.getExecuteAbility())>8){
+                studentInfo.setExecuteAbility("优");
+            }else if(Integer.parseInt(studentInfo.getExecuteAbility())>6){
+                studentInfo.setExecuteAbility("良");
+            }else {
+                studentInfo.setExecuteAbility("中");
+            }
+        }
+        if(!Objects.equals(studentInfo.getLearningAbility(), "")&&studentInfo.getLearningAbility()!=null){
+            if(Integer.parseInt(studentInfo.getLearningAbility())>8){
+                studentInfo.setLearningAbility("优");
+            }else if(Integer.parseInt(studentInfo.getLearningAbility())>6){
+                studentInfo.setLearningAbility("良");
+            }else {
+                studentInfo.setLearningAbility("中");
+            }
+        }
+
+        if(!Objects.equals(studentInfo.getExpressAbility(), "")&&studentInfo.getExpressAbility()!=null){
+            if(Integer.parseInt(studentInfo.getExpressAbility())>8){
+                studentInfo.setExpressAbility("优");
+            }else if(Integer.parseInt(studentInfo.getExpressAbility())>6){
+                studentInfo.setExpressAbility("良");
+            }else {
+                studentInfo.setExpressAbility("中");
+            }
+        }
+
+        if(!Objects.equals(studentInfo.getThinkingAbility(), "")&&studentInfo.getThinkingAbility()!=null){
+            if(Integer.parseInt(studentInfo.getThinkingAbility())>8){
+                studentInfo.setThinkingAbility("优");
+            }else if(Integer.parseInt(studentInfo.getThinkingAbility())>6){
+                studentInfo.setThinkingAbility("良");
+            }else {
+                studentInfo.setThinkingAbility("中");
+            }
+        }
+
         Result<Integer> result = new Result<>();
         if (studentInfo.getStuName() == null) {
             result.setData(0);

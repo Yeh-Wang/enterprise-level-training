@@ -595,3 +595,4 @@ Get/administrator-entity/login/{user_name},{password}
 	"data": null
 }
 ```  
+
