@@ -14,12 +14,12 @@ post /student-info-entity/getAllStudentInfo
 
 #### 返回数据类型
 
-| 名称      | 类型                 | 必选   | 说明     |
-|---------|--------------------|------|--------|
-| code    | int                | true | 状态码    |
-| message | string             | true | 提示信息   |
-| Data    | List<student_info> | true | 返回的数据  |
-| states  | boolean            | true | 正确还是错误 |
+| 名称      | 类型                 | 必选  | 说明     |
+|---------|--------------------|-----|--------|
+| code    | int                | --- | 状态码    |
+| message | string             | --- | 提示信息   |
+| Data    | List<student_info> | --- | 返回的数据  |
+| states  | boolean            | --- | 正确还是错误 |
 
 #### 返回示例
 成功示例
