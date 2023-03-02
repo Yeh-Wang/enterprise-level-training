@@ -596,3 +596,33 @@ Get/administrator-entity/login/{user_name},{password}
 }
 ```  
 
+## 申请审核表
+
+#### Get  获取所有申请审核表信息
+
+Get  /stu-to-auditor-entity/getAllAuditorInfo
+
+返回数据结构
+
+| 名称      | 类型                 | 必选   | 说明      |
+|---------|--------------------|------|---------|
+| message | string             | ---- | ------- |
+| status  | boolean            | ---- | 成功      |
+| code    | int                | ---- | 状态码     |
+| data    | List(StuToAuditor) | ---- | 审核信息表信息 |
+
+> 返回示例
+
+```json
+{"message":"OK",
+"status":true,
+"code":200,
+"data":[{
+  "id":4,
+  "reasonContent":"dasdsa",
+  "result":"das",
+  "applicant":"张三",
+  "auditor":"蓝天翔"
+}]
+}
+```
