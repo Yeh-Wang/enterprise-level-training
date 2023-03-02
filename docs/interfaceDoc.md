@@ -91,12 +91,12 @@ Get /findStudentByStuNumber
 
 #### 返回数据类型
 
-| 名称      | 类型           | 必选   | 说明     |
-|---------|--------------|------|--------|
-| code    | int          | true | 状态码    |
-| message | string       | true | 提示信息   |
-| Data    | student_info | true | 返回的数据  |
-| states  | boolean      | true | 正确还是错误 |
+| 名称      | 类型          | 必选   | 说明     |
+|---------|-------------|------|--------|
+| code    | int         | true | 状态码    |
+| message | string      | true | 提示信息   |
+| Data    | studentInfo | true | 返回的数据  |
+| states  | boolean     | true | 正确还是错误 |
 
 <br/>
 
@@ -105,43 +105,24 @@ Get /findStudentByStuNumber
 成功示例
 ````
 {"message":"查找成功！",
-
 "status":true,
-
 "code":200,"
-
 data":
-
       {
-
        "stuId":"dd11",
-
        "stuNumber":"6320070604",
-
        "stuName":"倪泽宇",
-
        "age":21,
-
        "sex":"男",
-
        "telephone":"1234632",
-
        "address":"江苏",
-
        "qq":"12324456",
-
        "permissions":0,
-
        "learningAbility":"优",
-
        "expressAbility":"优",
-
        "thinkingAbility":"优",
-
        "executeAbility":"优"
-
      }
-
 }
 ````
 ### Get 用名字模糊查询学生信息
@@ -196,21 +177,21 @@ Post /student-info-entity/updateStudent
 
 #### 参数信息
 
-| 名称               | 类型     | 必选    | 说明    |
-|:-----------------|:-------|:------|:------|
-| stu_id           | string | true  | 学生id  |
-| stu_number       | string | true  | 学生学号  |
-| stu_name         | string | true  | 学生姓名  |
-| age              | number | false | 年龄    |
-| sex              | string | false | 性别    |
-| telephone        | string | true  | 电话    |
-| address          | string | true  | 家庭地址  |
-| qq               | string | false | QQ    |
-| permissions      | number | false | 权限    |
-| learning_ability | string | false | 学习能力  |
-| express_ability  | string | false | 表达能力  |
-| thinking_ability | string | false | 逻辑思维  |
-| execute-ability  | string | false | 执行能力	 |
+| 名称              | 类型     | 必选    | 说明    |
+|:----------------|:-------|:------|:------|
+| stuId           | string | true  | 学生id  |
+| stuNumber       | string | true  | 学生学号  |
+| stuName         | string | true  | 学生姓名  |
+| age             | number | false | 年龄    |
+| sex             | string | false | 性别    |
+| telephone       | string | true  | 电话    |
+| address         | string | true  | 家庭地址  |
+| qq              | string | false | QQ    |
+| permissions     | number | false | 权限    |
+| learningAbility | string | false | 学习能力  |
+| expressAbility  | string | false | 表达能力  |
+| thinkingAbility | string | false | 逻辑思维  |
+| executeAbility  | string | false | 执行能力	 |
 
 #### 返回数据类型
 
@@ -238,9 +219,9 @@ post /student-info-entity/insertStudentInfo
 
 | 名称               | 类型     | 必选    | 说明   |
 |:-----------------|:-------|:------|:-----|
-| stu_id           | string | true  | 学生id |
-| stu_number       | string | true  | 学生学号 |
-| stu_name         | string | true  | 学生姓名 |
+| stuId            | string | true  | 学生id |
+| stuNumber        | string | true  | 学生学号 |
+| stuName          | string | true  | 学生姓名 |
 | age              | number | false | 年龄   |
 | sex              | string | false | 性别   |
 | telephone        | string | true  | 电话   |
@@ -280,9 +261,9 @@ Get /student-info-entity/deleteStudentById
 
 <br/>
 
-| 名称     | 类型     | 必填   | 说明    |
-|--------|--------|------|-------|
-| stu_id | string | true | 学生的id |
+| 名称    | 类型     | 必填   | 说明    |
+|-------|--------|------|-------|
+| stuId | string | true | 学生的id |
 
 #### 返回信息
 ````
@@ -565,10 +546,10 @@ Get/administrator-entity/login/{user_name},{password}
 #### 用户登录验证，用户名密码正确后返回token验证密钥
 > 请求参数
 
-| 名称        | 类型     | 必选   | 说明     |
-|-----------|--------|------|--------|
-| user_name | String | true | 管理员用户名 |
-| password  | String | true | 密码     |
+| 名称       | 类型     | 必选   | 说明     |
+|----------|--------|------|--------|
+| userName | String | true | 管理员用户名 |
+| password | String | true | 密码     |
 > 返回数据结构
 
 | 名称      | 类型     | 必选  | 说明         |
