@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class JWTUtils {
     //    签名过期时间 10个小时
-    private static final long EXPIRE_TIME = 3 * 60 * 1000;
+    private static final long EXPIRE_TIME = 24 * 60 * 60 * 1000;
     //    签名秘钥 可以自己设定
     private static final String PRIVATE_KEY = "rsa123456";
 

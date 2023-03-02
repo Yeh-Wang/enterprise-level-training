@@ -30,7 +30,7 @@ public class AdministratorController {
     }
 
     /**
-     * 通过管理员id获取该管理员的信息
+     * 通过管理员username获取该管理员的信息
      *
      * @param username 管理员user_name
      * @return result类
@@ -79,22 +79,61 @@ public class AdministratorController {
         return result;
     }
 
+    /**
+     * 注册管理员
+     *
+     * @param administratorEntity 一个管理员实体类
+     * @return 注册结果
+     */
+
     @PostMapping("/register")
     public Result<String> register(@RequestBody AdministratorEntity administratorEntity) {
+        Result<String> result = new Result<>();
+        if (administratorService.checkSameUsername(administratorEntity.getUserName()) == 1) {
+            result.setMessage("用户名已被占用");
+            result.setCode(404);
+            result.setData("0");
+            result.setStatus(false);
+            return result;
+        }
         UUID uuid = UUID.randomUUID();
         String id = uuid.toString();
         administratorEntity.setId(id);
         administratorEntity.setUserType(0);
-        Result<String> result = new Result<>();
+
         if (administratorService.register(administratorEntity) == 1) {
-            result.setData(null);
+            result.setData("1");
             result.setMessage("注册成功");
             result.setCode(200);
             result.setStatus(true);
             return result;
         } else {
-            result.setData(null);
+            result.setData("0");
             result.setMessage("注册失败");
+            result.setCode(404);
+            result.setStatus(false);
+            return result;
+        }
+    }
+
+    /**
+     * 修改管理员信息
+     *
+     * @param administratorEntity 一个管理员实体类
+     * @return 修改结果
+     */
+    @PostMapping("/modifyAdministratorInfo")
+    public Result<String> modifyAdministratorInfo(@RequestBody AdministratorEntity administratorEntity) {
+        Result<String> result = new Result<>();
+        if (administratorService.modifyInfo(administratorEntity) == 1) {
+            result.setData("1");
+            result.setMessage("修改成功");
+            result.setCode(200);
+            result.setStatus(true);
+            return result;
+        } else {
+            result.setData("0");
+            result.setMessage("修改失败");
             result.setCode(404);
             result.setStatus(false);
             return result;

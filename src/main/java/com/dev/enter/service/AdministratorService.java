@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @since 2023-02-28 10:59:36
@@ -18,8 +18,12 @@ public interface AdministratorService extends IService<AdministratorEntity> {
     /**
      * 登陆验证
      */
-    AdministratorEntity checkLogin(String username,String password);
+    AdministratorEntity checkLogin(String username, String password);
 
     int register(AdministratorEntity administratorEntity);
+
+    int modifyInfo(AdministratorEntity administratorEntity);
+
+    int checkSameUsername(String username);
 
 }
