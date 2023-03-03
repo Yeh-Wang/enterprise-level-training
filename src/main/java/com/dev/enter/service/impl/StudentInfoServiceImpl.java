@@ -1,5 +1,6 @@
 package com.dev.enter.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dev.enter.entity.StudentInfoEntity;
 import com.dev.enter.mapper.StudentInfoMapper;
@@ -12,29 +13,29 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @since 2023-02-28 10:59:36
  */
 @Service
 public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, StudentInfoEntity> implements StudentInfoService {
-   private StudentInfoMapper studentInfoMapper;
-   @Autowired
-   public  void  setStudentInfoMapper(StudentInfoMapper studentInfoMapper)
-   {
-       this.studentInfoMapper=studentInfoMapper;
-   }
+    private StudentInfoMapper studentInfoMapper;
+
+    @Autowired
+    public void setStudentInfoMapper(StudentInfoMapper studentInfoMapper) {
+        this.studentInfoMapper = studentInfoMapper;
+    }
 
     @Override
     public StudentInfoEntity findStudentByStuNumber(String stuNumber) {
-        return studentInfoMapper.selectOne(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getStuNumber,stuNumber));
+        return studentInfoMapper.selectOne(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getStuNumber, stuNumber));
 
     }
 
     @Override
     public List<StudentInfoEntity> findStudentBuStuName(String stuName) {
-        return studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().like(StudentInfoEntity::getStuName,stuName));
+        return studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().like(StudentInfoEntity::getStuName, stuName));
     }
 
     @Override
@@ -44,28 +45,41 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
 
     @Override
     public int deleteStudentById(String stuId) {
-        return  studentInfoMapper.deleteById(stuId);
+        return studentInfoMapper.deleteById(stuId);
     }
 
     @Override
     public int updateStudent(StudentInfoEntity studentInfo) {
-        return  studentInfoMapper.updateById(studentInfo);
+        return studentInfoMapper.updateById(studentInfo);
     }
 
     @Override
     public int insertStudentInfo(StudentInfoEntity studentInfo) {
-        return  studentInfoMapper.insert(studentInfo);
+        return studentInfoMapper.insert(studentInfo);
     }
 
     @Override
     public int judgeStuNumber(String stuNumber) {
         StudentInfoEntity studentInfo;
-        studentInfo=studentInfoMapper.selectOne(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getStuNumber,stuNumber));
-        if (studentInfo!= null){
+        studentInfo = studentInfoMapper.selectOne(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getStuNumber, stuNumber));
+        if (studentInfo != null) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
+    }
+
+    @Override
+    public double getFemaleProp() {
+        List<StudentInfoEntity> list = studentInfoMapper.selectList(new QueryWrapper<StudentInfoEntity>().eq("sex","女"));
+        List<StudentInfoEntity> list_all = studentInfoMapper.selectList(null);
+        return ((list.size()*1.00/list_all.size())*100);
+    }
+
+    @Override
+    public double getMaleProp() {
+        List<StudentInfoEntity> list = studentInfoMapper.selectList(new QueryWrapper<StudentInfoEntity>().eq("sex","男"));
+        List<StudentInfoEntity> list_all = studentInfoMapper.selectList(null);
+        return (float) ((list.size()*1.00/list_all.size())*100);
     }
 }

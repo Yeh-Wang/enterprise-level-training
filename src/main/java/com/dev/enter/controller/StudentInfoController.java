@@ -7,9 +7,7 @@ import com.dev.enter.service.impl.StudentInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * <p>
@@ -225,6 +223,26 @@ public class StudentInfoController {
             result.setMessage("学号已经存在");
             return result;
         }
+    }
 
+    /**
+     * 获取女生性别比例
+     */
+    @ResponseBody
+    @GetMapping("/getFemaleProp")
+    Map<String,Double> getFemaleProp(){
+        Map<String,Double> map = new HashMap<>();
+        map.put("女",studentInfoService.getFemaleProp());
+        return map;
+    }
+    /**
+     * 获取男生性别比例
+     */
+    @ResponseBody
+    @GetMapping("/getMaleProp")
+    Map<String,Double> getMaleProp(){
+        Map<String,Double> map = new HashMap<>();
+        map.put("男",studentInfoService.getMaleProp());
+        return map;
     }
 }

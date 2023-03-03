@@ -3,6 +3,7 @@ package com.dev.enter;
 import com.dev.enter.mapper.AdministratorMapper;
 import com.dev.enter.mapper.QuestionSourceMapper;
 import com.dev.enter.service.impl.QuestionSourceServiceImpl;
+import com.dev.enter.service.impl.StudentInfoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -24,14 +25,17 @@ class EnterLevelSystemApplicationTests {
     @Autowired
     QuestionSourceServiceImpl questionSourceService;
 
+    @Autowired
+    StudentInfoServiceImpl studentInfoService;
+
     @Test
     void contextLoads() {
     }
 
     @Test
-    void uuid() throws JSONException {
-//        System.out.println(questionSourceMa);
-
+    void test(){
+        System.out.println(studentInfoService.getFemaleProp());
+        System.out.println(studentInfoService.getMaleProp());
     }
 
 }
