@@ -23,4 +23,13 @@ public interface StudentInfoService extends IService<StudentInfoEntity> {
      int updateStudent(@RequestBody StudentInfoEntity studentInfo);
      int insertStudentInfo(@RequestBody StudentInfoEntity studentInfo);
      int judgeStuNumber(@PathVariable String stuNumber);
+
+     /**
+      * 获取女生性别比例
+      */
+     double getFemaleProp();
+     /**
+      * 获取男生性别比例
+      */
+     double getMaleProp();
 }

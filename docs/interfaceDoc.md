@@ -81,7 +81,7 @@ post /student-info-entity/getAllStudentInfo
 
 ### Get 用学号查找学员
 
-Get /findStudentByStuNumber
+Get /student-info-entity/findStudentByStuNumber
 
 #### 参数表格如下
 
@@ -595,7 +595,7 @@ Post/administrator-entity/register
 | message | String | --- | 注册提示信息 |
 | status  | Bool   | --- | 成功与否   |
 | code    | int    | --- | 状态码    |
-| data    | null   | --- | ---    |  
+| data    | string | --- | ---    |  
 
 > 返回示例
 
@@ -604,13 +604,51 @@ Post/administrator-entity/register
 	"message": "注册成功",
 	"status": true,
 	"code": 200,
-	"data": null
+	"data": "1"
 }
 ```  
+用户名被占用
+```json
+{
+	"message": "用户名已被占用",
+	"status": false,
+	"code": 404,
+	"data": "0"
+}
+```  
+***  
+Post/administrator-entity/modifyAdministratorInfo
+#### 修改管理员信息  
+> 请求参数
+
+| 名称            | 类型                  | 必选   | 说明         |
+|---------------|---------------------|------|------------|
+| administrator | AdministratorEntity | true | 一个管理员信息实体类 |    
+    
+> 返回数据结构 
+
+| 名称      | 类型     | 必选  | 说明     |
+|---------|--------|-----|--------|
+| message | String | --- | 注册提示信息 |
+| status  | Bool   | --- | 成功与否   |
+| code    | int    | --- | 状态码    |
+| data    | string | --- | ---    |    
+
+> 返回示例  
+
+```json
+{
+  "message": "修改成功",
+  "status": true,
+  "code": 200,
+  "data": "1"
+}
+``` 
+  
 
 ## 申请审核表
 
-#### Get  获取所有申请审核表信息
+### Get  获取所有申请审核表信息
 
 Get  /stu-to-auditor-entity/getAllAuditorInfo
 
@@ -637,4 +675,108 @@ Get  /stu-to-auditor-entity/getAllAuditorInfo
   "auditor":"蓝天翔"
 }]
 }
+```
+
+###   增加审核表信息
+Post /audit-table-entity/insertAuditTable
+
+### 参数信息
+
+| 名称            | 类型            | 必选    | 说明    |
+|---------------|---------------|-------|-------|
+| id            | int           | ---   | 审核表id |
+| applicant     | string(学生ID)  | true  | 申请人   |
+| audit         | string(管理员ID) | false | 审核人   |
+| reasonContent | string        | ---   | 申请原因  |  
+| result        | string        |       | 审核结果  |
+
+### 返回数据类型
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 添加成功备注  |
+
+### 删除审核表信息
+Get /audit-table-entity/deleteAuditTable
+
+#### 请求参数名称
+
+| 名称  | 类型  | 必选   | 说明   |
+|-----|-----|------|------|
+| id  | int | true | 问题编号 |
+
+返回数据结构
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 删除成功备注  |
+
+> 返回示例
+
+```json
+{"message":"OK",
+"status":true,
+"code":200,
+"data":"删除成功"
+}
+```
+### 更新审核表
+Post /audit-table-entity/updateAuditTable
+
+### 请求参数名称
+
+| 名称            | 类型            | 必选    | 说明    |
+|---------------|---------------|-------|-------|
+| id            | int           | ---   | 审核表id |
+| applicant     | string(学生ID)  | true  | 申请人   |
+| audit         | string(管理员ID) | false | 审核人   |
+| reasonContent | string        | ---   | 申请原因  |  
+| result        | string        |       | 审核结果  |
+### 返回数据结构
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 删除成功备注  |
+```json
+{"message":"OK",
+"status":true,
+"code":200,
+"data":"更新成功"
+}
+```
+### 通过id查找审核表
+#### 请求参数名称
+
+| 名称  | 类型  | 必选   | 说明   |
+|-----|-----|------|------|
+| id  | int | true | 问题编号 |
+
+返回数据结构
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 查找成功备注  |
+> 返回示例
+
+```json
+{"message":"查找成功！",
+  "status":true,
+  "code":200,"data":
+{"id":5,
+  "applicant":"bb11",
+  "auditor":"973309d4-3b23-4bed-a436-f4ceffdf1573",
+  "reasonContent":"fgsdg",
+  "result":"dgs"}}
 ```

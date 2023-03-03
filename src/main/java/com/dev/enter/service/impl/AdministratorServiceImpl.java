@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务实现类
@@ -27,7 +29,7 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
 
     @Override
     public AdministratorEntity getAdministratorByUsername(String username) {
-        return administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().eq("user_name",username));
+        return administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().eq("user_name", username));
     }
 
     @Override
@@ -45,4 +47,21 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
     public int register(AdministratorEntity administratorEntity) {
         return administratorMapper.insert(administratorEntity);
     }
+
+    @Override
+    public int modifyInfo(AdministratorEntity administratorEntity) {
+        return administratorMapper.updateById(administratorEntity);
+    }
+
+    @Override
+    public int checkSameUsername(String username) {
+        List<AdministratorEntity> administratorEntities = administratorMapper.selectList(new QueryWrapper<AdministratorEntity>()
+                .eq("user_name", username));
+        if (administratorEntities.size() != 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 }
