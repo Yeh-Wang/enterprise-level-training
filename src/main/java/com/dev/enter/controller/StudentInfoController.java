@@ -247,7 +247,7 @@ public class StudentInfoController {
         List<Map<Object, Object>> list = new ArrayList<>();
         Map<Object, Object> map = new HashMap<>();
         map.put("name","男");
-        map.put("value",studentInfoService.getFemaleProp());
+        map.put("value",100-studentInfoService.getFemaleProp());
         list.add(map);
         return list;
     }
