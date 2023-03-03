@@ -230,19 +230,25 @@ public class StudentInfoController {
      */
     @ResponseBody
     @GetMapping("/getFemaleProp")
-    Map<String,Double> getFemaleProp(){
-        Map<String,Double> map = new HashMap<>();
-        map.put("女",studentInfoService.getFemaleProp());
-        return map;
+    List<Map<Object, Object>> getFemaleProp(){
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("name","女");
+        map.put("value",studentInfoService.getFemaleProp());
+        list.add(map);
+        return list;
     }
     /**
      * 获取男生性别比例
      */
     @ResponseBody
     @GetMapping("/getMaleProp")
-    Map<String,Double> getMaleProp(){
-        Map<String,Double> map = new HashMap<>();
-        map.put("男",studentInfoService.getMaleProp());
-        return map;
+    List<Map<Object, Object>> getMaleProp(){
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("name","男");
+        map.put("value",studentInfoService.getFemaleProp());
+        list.add(map);
+        return list;
     }
 }
