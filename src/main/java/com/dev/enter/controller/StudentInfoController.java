@@ -136,6 +136,11 @@ public class StudentInfoController {
         return result;
     }
 
+    /**
+     *  增加学生信息
+     * @param studentInfo
+     * @return
+     */
     @ResponseBody
     @PostMapping("/insertStudentInfo")
     Result<Integer> insertStudentInfo(@RequestBody StudentInfoEntity studentInfo) {

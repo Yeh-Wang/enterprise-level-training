@@ -17,10 +17,10 @@ import java.util.List;
 public interface StudentInfoService extends IService<StudentInfoEntity> {
      StudentInfoEntity findStudentByStuNumber( String stuNumber);
 
-     List<StudentInfoEntity> findStudentBuStuName(@PathVariable String stuName);
+     List<StudentInfoEntity> findStudentBuStuName( String stuName);
      List<StudentInfoEntity> getAllStudentInfo ();
-     int  deleteStudentById(@PathVariable String stuId);
-     int updateStudent(@RequestBody StudentInfoEntity studentInfo);
-     int insertStudentInfo(@RequestBody StudentInfoEntity studentInfo);
-     int judgeStuNumber(@PathVariable String stuNumber);
+     int  deleteStudentById( String stuId);
+     int updateStudent(StudentInfoEntity studentInfo);
+     int insertStudentInfo( StudentInfoEntity studentInfo);
+     int judgeStuNumber(String stuNumber);
 }
