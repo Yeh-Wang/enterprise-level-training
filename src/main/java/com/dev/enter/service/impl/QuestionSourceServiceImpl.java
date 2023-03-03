@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @since 2023-02-28 10:59:36
@@ -22,8 +22,8 @@ public class QuestionSourceServiceImpl extends ServiceImpl<QuestionSourceMapper,
     private QuestionSourceMapper questionSourceMapper;
 
     @Autowired
-    public void setQuestionSourceMapper(QuestionSourceMapper questionSourceMapper){
-        this.questionSourceMapper=questionSourceMapper;
+    public void setQuestionSourceMapper(QuestionSourceMapper questionSourceMapper) {
+        this.questionSourceMapper = questionSourceMapper;
     }
 
     @Override
@@ -50,4 +50,5 @@ public class QuestionSourceServiceImpl extends ServiceImpl<QuestionSourceMapper,
     public Integer deleteQuestionById(int id) {
         return questionSourceMapper.deleteById(id);
     }
+
 }

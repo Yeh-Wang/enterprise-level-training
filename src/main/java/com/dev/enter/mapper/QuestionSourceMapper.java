@@ -20,4 +20,5 @@ public interface QuestionSourceMapper extends BaseMapper<QuestionSourceEntity> {
 
     @Select("select * from question_source where question_type = #{type}")
     List<QuestionSourceEntity> getQuestionByType(@Param("type") String type);
+
 }
