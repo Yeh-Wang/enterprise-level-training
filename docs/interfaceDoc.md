@@ -81,7 +81,7 @@ post /student-info-entity/getAllStudentInfo
 
 ### Get 用学号查找学员
 
-Get /student-info-entity/findStudentByStuNumber
+Get /findStudentByStuNumber
 
 #### 参数表格如下
 
