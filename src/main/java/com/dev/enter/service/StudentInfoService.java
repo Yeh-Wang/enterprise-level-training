@@ -17,12 +17,12 @@ import java.util.List;
 public interface StudentInfoService extends IService<StudentInfoEntity> {
      StudentInfoEntity findStudentByStuNumber( String stuNumber);
 
-     List<StudentInfoEntity> findStudentBuStuName(@PathVariable String stuName);
+     List<StudentInfoEntity> findStudentBuStuName(String stuName);
      List<StudentInfoEntity> getAllStudentInfo ();
-     int  deleteStudentById(@PathVariable String stuId);
-     int updateStudent(@RequestBody StudentInfoEntity studentInfo);
-     int insertStudentInfo(@RequestBody StudentInfoEntity studentInfo);
-     int judgeStuNumber(@PathVariable String stuNumber);
+     int  deleteStudentById(String stuId);
+     int updateStudent(StudentInfoEntity studentInfo);
+     int insertStudentInfo(StudentInfoEntity studentInfo);
+     int judgeStuNumber(String stuNumber);
 
      /**
       * 获取女生性别比例
@@ -34,7 +34,7 @@ public interface StudentInfoService extends IService<StudentInfoEntity> {
      double getMaleProp();
 
      /**
-      * 学生年龄比例
+      * 学生年龄人数
       */
      int getCountByAge(int begin_age , int end_age);
 
