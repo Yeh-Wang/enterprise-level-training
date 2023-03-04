@@ -82,4 +82,14 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
         List<StudentInfoEntity> list_all = studentInfoMapper.selectList(null);
         return (float) ((list.size()*1.00/list_all.size())*100);
     }
+
+    @Override
+    public int getCountByAge(int begin_age,int end_age) {
+        return studentInfoMapper.selectList(new QueryWrapper<StudentInfoEntity>().between("age",begin_age,end_age)).size();
+    }
+
+    @Override
+    public int getAllStudentCount() {
+        return studentInfoMapper.selectList(null).size();
+    }
 }

@@ -251,4 +251,19 @@ public class StudentInfoController {
         list.add(map);
         return list;
     }
+
+
+
+    /**
+     * 获取学生总人数
+     */
+    @ResponseBody
+    @GetMapping("/getAllStudentCount")
+    List<Map<Object, Object>> getAllStudentCount(){
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("value",studentInfoService.getAllStudentCount());
+        list.add(map);
+        return list;
+    }
 }

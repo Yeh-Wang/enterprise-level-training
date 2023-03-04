@@ -32,4 +32,14 @@ public interface StudentInfoService extends IService<StudentInfoEntity> {
       * 获取男生性别比例
       */
      double getMaleProp();
+
+     /**
+      * 学生年龄比例
+      */
+     int getCountByAge(int begin_age , int end_age);
+
+     /**
+      * 获取学生总人数
+      */
+     int getAllStudentCount();
 }
