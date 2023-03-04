@@ -23,4 +23,5 @@ public interface StudentInfoService extends IService<StudentInfoEntity> {
      int updateStudent(StudentInfoEntity studentInfo);
      int insertStudentInfo( StudentInfoEntity studentInfo);
      int judgeStuNumber(String stuNumber);
+     int getAverageLearningAbility( String learningAbility);
 }

@@ -68,4 +68,17 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
             return 0;
         }
     }
+
+    /**
+     * 得到评价学习能力为参数的人数
+     * @param learningAbility
+     * @return
+     */
+    @Override
+    public int getAverageLearningAbility(String learningAbility) {
+        int aNum;
+        aNum=studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getLearningAbility,learningAbility)).size();
+
+       return aNum;
+    }
 }
