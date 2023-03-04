@@ -24,4 +24,13 @@ public interface StudentInfoService extends IService<StudentInfoEntity> {
      int insertStudentInfo( StudentInfoEntity studentInfo);
      int judgeStuNumber(String stuNumber);
      int getAverageLearningAbility( String learningAbility);
+
+     /**
+      * 获取女生性别比例
+      */
+     double getFemaleProp();
+     /**
+      * 获取男生性别比例
+      */
+     double getMaleProp();
 }

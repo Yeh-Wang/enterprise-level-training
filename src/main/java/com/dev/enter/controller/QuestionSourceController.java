@@ -135,4 +135,15 @@ public class QuestionSourceController {
         }
         return result;
     }
+
+    /**
+     * 根据问题类型进行数量统计
+     */
+    @ResponseBody
+    @GetMapping("/getCountByType")
+    String getCountByType(){
+//        System.out.println(questionSourceService.getCountByType());
+//        return questionSourceService.getCountByType();
+        return null;
+    }
 }

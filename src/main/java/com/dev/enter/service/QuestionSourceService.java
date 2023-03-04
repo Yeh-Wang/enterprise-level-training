@@ -38,4 +38,5 @@ public interface QuestionSourceService extends IService<QuestionSourceEntity> {
      * 删除一个问题信息通过编号
      */
     Integer deleteQuestionById(int id);
+
 }

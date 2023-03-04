@@ -1,5 +1,6 @@
 package com.dev.enter.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dev.enter.entity.StudentInfoEntity;
 import com.dev.enter.mapper.StudentInfoMapper;
@@ -12,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @since 2023-02-28 10:59:36
@@ -60,11 +61,10 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
     @Override
     public int judgeStuNumber(String stuNumber) {
         StudentInfoEntity studentInfo;
-        studentInfo=studentInfoMapper.selectOne(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getStuNumber,stuNumber));
-        if (studentInfo!= null){
+        studentInfo = studentInfoMapper.selectOne(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getStuNumber, stuNumber));
+        if (studentInfo != null) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -80,5 +80,19 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
         aNum=studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getLearningAbility,learningAbility)).size();
 
        return aNum;
+    }
+
+    @Override
+    public double getFemaleProp() {
+        List<StudentInfoEntity> list = studentInfoMapper.selectList(new QueryWrapper<StudentInfoEntity>().eq("sex","女"));
+        List<StudentInfoEntity> list_all = studentInfoMapper.selectList(null);
+        return ((list.size()*1.00/list_all.size())*100);
+    }
+
+    @Override
+    public double getMaleProp() {
+        List<StudentInfoEntity> list = studentInfoMapper.selectList(new QueryWrapper<StudentInfoEntity>().eq("sex","男"));
+        List<StudentInfoEntity> list_all = studentInfoMapper.selectList(null);
+        return (float) ((list.size()*1.00/list_all.size())*100);
     }
 }

@@ -81,7 +81,7 @@ post /student-info-entity/getAllStudentInfo
 
 ### Get 用学号查找学员
 
-Get /findStudentByStuNumber
+Get /student-info-entity/findStudentByStuNumber
 
 #### 参数表格如下
 
@@ -91,12 +91,12 @@ Get /findStudentByStuNumber
 
 #### 返回数据类型
 
-| 名称      | 类型           | 必选   | 说明     |
-|---------|--------------|------|--------|
-| code    | int          | true | 状态码    |
-| message | string       | true | 提示信息   |
-| Data    | student_info | true | 返回的数据  |
-| states  | boolean      | true | 正确还是错误 |
+| 名称      | 类型          | 必选   | 说明     |
+|---------|-------------|------|--------|
+| code    | int         | true | 状态码    |
+| message | string      | true | 提示信息   |
+| Data    | studentInfo | true | 返回的数据  |
+| states  | boolean     | true | 正确还是错误 |
 
 <br/>
 
@@ -105,43 +105,24 @@ Get /findStudentByStuNumber
 成功示例
 ````
 {"message":"查找成功！",
-
 "status":true,
-
 "code":200,"
-
 data":
-
       {
-
        "stuId":"dd11",
-
        "stuNumber":"6320070604",
-
        "stuName":"倪泽宇",
-
        "age":21,
-
        "sex":"男",
-
        "telephone":"1234632",
-
        "address":"江苏",
-
        "qq":"12324456",
-
        "permissions":0,
-
        "learningAbility":"优",
-
        "expressAbility":"优",
-
        "thinkingAbility":"优",
-
        "executeAbility":"优"
-
      }
-
 }
 ````
 ### Get 用名字模糊查询学生信息
@@ -196,21 +177,21 @@ Post /student-info-entity/updateStudent
 
 #### 参数信息
 
-| 名称               | 类型     | 必选    | 说明    |
-|:-----------------|:-------|:------|:------|
-| stu_id           | string | true  | 学生id  |
-| stu_number       | string | true  | 学生学号  |
-| stu_name         | string | true  | 学生姓名  |
-| age              | number | false | 年龄    |
-| sex              | string | false | 性别    |
-| telephone        | string | true  | 电话    |
-| address          | string | true  | 家庭地址  |
-| qq               | string | false | QQ    |
-| permissions      | number | false | 权限    |
-| learning_ability | string | false | 学习能力  |
-| express_ability  | string | false | 表达能力  |
-| thinking_ability | string | false | 逻辑思维  |
-| execute-ability  | string | false | 执行能力	 |
+| 名称              | 类型     | 必选    | 说明    |
+|:----------------|:-------|:------|:------|
+| stuId           | string | true  | 学生id  |
+| stuNumber       | string | true  | 学生学号  |
+| stuName         | string | true  | 学生姓名  |
+| age             | number | false | 年龄    |
+| sex             | string | false | 性别    |
+| telephone       | string | true  | 电话    |
+| address         | string | true  | 家庭地址  |
+| qq              | string | false | QQ    |
+| permissions     | number | false | 权限    |
+| learningAbility | string | false | 学习能力  |
+| expressAbility  | string | false | 表达能力  |
+| thinkingAbility | string | false | 逻辑思维  |
+| executeAbility  | string | false | 执行能力	 |
 
 #### 返回数据类型
 
@@ -238,9 +219,9 @@ post /student-info-entity/insertStudentInfo
 
 | 名称               | 类型     | 必选    | 说明   |
 |:-----------------|:-------|:------|:-----|
-| stu_id           | string | true  | 学生id |
-| stu_number       | string | true  | 学生学号 |
-| stu_name         | string | true  | 学生姓名 |
+| stuId            | string | true  | 学生id |
+| stuNumber        | string | true  | 学生学号 |
+| stuName          | string | true  | 学生姓名 |
 | age              | number | false | 年龄   |
 | sex              | string | false | 性别   |
 | telephone        | string | true  | 电话   |
@@ -280,9 +261,9 @@ Get /student-info-entity/deleteStudentById
 
 <br/>
 
-| 名称     | 类型     | 必填   | 说明    |
-|--------|--------|------|-------|
-| stu_id | string | true | 学生的id |
+| 名称    | 类型     | 必填   | 说明    |
+|-------|--------|------|-------|
+| stuId | string | true | 学生的id |
 
 #### 返回信息
 ````
@@ -565,10 +546,10 @@ Get/administrator-entity/login/{user_name},{password}
 #### 用户登录验证，用户名密码正确后返回token验证密钥
 > 请求参数
 
-| 名称        | 类型     | 必选   | 说明     |
-|-----------|--------|------|--------|
-| user_name | String | true | 管理员用户名 |
-| password  | String | true | 密码     |
+| 名称       | 类型     | 必选   | 说明     |
+|----------|--------|------|--------|
+| userName | String | true | 管理员用户名 |
+| password | String | true | 密码     |
 > 返回数据结构
 
 | 名称      | 类型     | 必选  | 说明         |
@@ -614,7 +595,7 @@ Post/administrator-entity/register
 | message | String | --- | 注册提示信息 |
 | status  | Bool   | --- | 成功与否   |
 | code    | int    | --- | 状态码    |
-| data    | null   | --- | ---    |  
+| data    | string | --- | ---    |  
 
 > 返回示例
 
@@ -623,13 +604,51 @@ Post/administrator-entity/register
 	"message": "注册成功",
 	"status": true,
 	"code": 200,
-	"data": null
+	"data": "1"
 }
 ```  
+用户名被占用
+```json
+{
+	"message": "用户名已被占用",
+	"status": false,
+	"code": 404,
+	"data": "0"
+}
+```  
+***  
+Post/administrator-entity/modifyAdministratorInfo
+#### 修改管理员信息  
+> 请求参数
+
+| 名称            | 类型                  | 必选   | 说明         |
+|---------------|---------------------|------|------------|
+| administrator | AdministratorEntity | true | 一个管理员信息实体类 |    
+    
+> 返回数据结构 
+
+| 名称      | 类型     | 必选  | 说明     |
+|---------|--------|-----|--------|
+| message | String | --- | 注册提示信息 |
+| status  | Bool   | --- | 成功与否   |
+| code    | int    | --- | 状态码    |
+| data    | string | --- | ---    |    
+
+> 返回示例  
+
+```json
+{
+  "message": "修改成功",
+  "status": true,
+  "code": 200,
+  "data": "1"
+}
+``` 
+  
 
 ## 申请审核表
 
-#### Get  获取所有申请审核表信息
+### Get  获取所有申请审核表信息
 
 Get  /stu-to-auditor-entity/getAllAuditorInfo
 
@@ -656,4 +675,108 @@ Get  /stu-to-auditor-entity/getAllAuditorInfo
   "auditor":"蓝天翔"
 }]
 }
+```
+
+###   增加审核表信息
+Post /audit-table-entity/insertAuditTable
+
+### 参数信息
+
+| 名称            | 类型            | 必选    | 说明    |
+|---------------|---------------|-------|-------|
+| id            | int           | ---   | 审核表id |
+| applicant     | string(学生ID)  | true  | 申请人   |
+| audit         | string(管理员ID) | false | 审核人   |
+| reasonContent | string        | ---   | 申请原因  |  
+| result        | string        |       | 审核结果  |
+
+### 返回数据类型
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 添加成功备注  |
+
+### 删除审核表信息
+Get /audit-table-entity/deleteAuditTable
+
+#### 请求参数名称
+
+| 名称  | 类型  | 必选   | 说明   |
+|-----|-----|------|------|
+| id  | int | true | 问题编号 |
+
+返回数据结构
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 删除成功备注  |
+
+> 返回示例
+
+```json
+{"message":"OK",
+"status":true,
+"code":200,
+"data":"删除成功"
+}
+```
+### 更新审核表
+Post /audit-table-entity/updateAuditTable
+
+### 请求参数名称
+
+| 名称            | 类型            | 必选    | 说明    |
+|---------------|---------------|-------|-------|
+| id            | int           | ---   | 审核表id |
+| applicant     | string(学生ID)  | true  | 申请人   |
+| audit         | string(管理员ID) | false | 审核人   |
+| reasonContent | string        | ---   | 申请原因  |  
+| result        | string        |       | 审核结果  |
+### 返回数据结构
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 删除成功备注  |
+```json
+{"message":"OK",
+"status":true,
+"code":200,
+"data":"更新成功"
+}
+```
+### 通过id查找审核表
+#### 请求参数名称
+
+| 名称  | 类型  | 必选   | 说明   |
+|-----|-----|------|------|
+| id  | int | true | 问题编号 |
+
+返回数据结构
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | 查找成功备注  |
+> 返回示例
+
+```json
+{"message":"查找成功！",
+  "status":true,
+  "code":200,"data":
+{"id":5,
+  "applicant":"bb11",
+  "auditor":"973309d4-3b23-4bed-a436-f4ceffdf1573",
+  "reasonContent":"fgsdg",
+  "result":"dgs"}}
 ```

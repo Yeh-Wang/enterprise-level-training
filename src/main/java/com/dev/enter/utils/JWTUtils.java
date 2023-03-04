@@ -1,14 +1,8 @@
 package com.dev.enter.utils;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTCreator;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.dev.enter.entity.AdministratorEntity;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +13,7 @@ import java.util.Map;
  */
 public class JWTUtils {
     //    签名过期时间 10个小时
-    private static final long EXPIRE_TIME = 3 * 60 * 1000;
+    private static final long EXPIRE_TIME = 24 * 60 * 60 * 1000;
     //    签名秘钥 可以自己设定
     private static final String PRIVATE_KEY = "rsa123456";
 
@@ -30,7 +24,6 @@ public class JWTUtils {
 
         header.put("typ", "JWT");
         header.put("alg", "HS256");
-//
         Map<String, Object> claims = new HashMap<>();
 
 //        自定义有效荷载部分
