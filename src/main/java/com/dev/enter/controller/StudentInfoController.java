@@ -1,9 +1,11 @@
 package com.dev.enter.controller;
 
 
+import com.dev.enter.entity.Point;
 import com.dev.enter.entity.Result;
 import com.dev.enter.entity.StudentInfoEntity;
 import com.dev.enter.service.impl.StudentInfoServiceImpl;
+import com.dev.enter.utils.DistanceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -114,7 +116,6 @@ public class StudentInfoController {
 
     /**
      * 更新学生的信息
-     *
      */
     @ResponseBody
     @PostMapping("/updateStudent")
@@ -141,69 +142,68 @@ public class StudentInfoController {
         studentInfo.setStuId(String.valueOf(uuid));
         studentInfo.setPermissions(0);
 
-
-        if(!Objects.equals(studentInfo.getExecuteAbility(), "")&&studentInfo.getExecuteAbility()!=null){
-            if(Integer.parseInt(studentInfo.getExecuteAbility())>8){
+        if (!Objects.equals(studentInfo.getExecuteAbility(), "") && studentInfo.getExecuteAbility() != null) {
+            if (Integer.parseInt(studentInfo.getExecuteAbility()) > 8) {
                 studentInfo.setExecuteAbility("优");
-            }else if(Integer.parseInt(studentInfo.getExecuteAbility())>6){
+            } else if (Integer.parseInt(studentInfo.getExecuteAbility()) > 6) {
                 studentInfo.setExecuteAbility("良");
-            }else {
+            } else {
                 studentInfo.setExecuteAbility("中");
             }
         }
-        if(!Objects.equals(studentInfo.getLearningAbility(), "")&&studentInfo.getLearningAbility()!=null){
-            if(Integer.parseInt(studentInfo.getLearningAbility())>8){
+        if (!Objects.equals(studentInfo.getLearningAbility(), "") && studentInfo.getLearningAbility() != null) {
+            if (Integer.parseInt(studentInfo.getLearningAbility()) > 8) {
                 studentInfo.setLearningAbility("优");
-            }else if(Integer.parseInt(studentInfo.getLearningAbility())>6){
+            } else if (Integer.parseInt(studentInfo.getLearningAbility()) > 6) {
                 studentInfo.setLearningAbility("良");
-            }else {
+            } else {
                 studentInfo.setLearningAbility("中");
             }
         }
 
-        if(!Objects.equals(studentInfo.getExpressAbility(), "")&&studentInfo.getExpressAbility()!=null){
-            if(Integer.parseInt(studentInfo.getExpressAbility())>8){
+        if (!Objects.equals(studentInfo.getExpressAbility(), "") && studentInfo.getExpressAbility() != null) {
+            if (Integer.parseInt(studentInfo.getExpressAbility()) > 8) {
                 studentInfo.setExpressAbility("优");
-            }else if(Integer.parseInt(studentInfo.getExpressAbility())>6){
+            } else if (Integer.parseInt(studentInfo.getExpressAbility()) > 6) {
                 studentInfo.setExpressAbility("良");
-            }else {
+            } else {
                 studentInfo.setExpressAbility("中");
             }
         }
 
-        if(!Objects.equals(studentInfo.getThinkingAbility(), "")&&studentInfo.getThinkingAbility()!=null){
-            if(Integer.parseInt(studentInfo.getThinkingAbility())>8){
+        if (!Objects.equals(studentInfo.getThinkingAbility(), "") && studentInfo.getThinkingAbility() != null) {
+            if (Integer.parseInt(studentInfo.getThinkingAbility()) > 8) {
                 studentInfo.setThinkingAbility("优");
-            }else if(Integer.parseInt(studentInfo.getThinkingAbility())>6){
+            } else if (Integer.parseInt(studentInfo.getThinkingAbility()) > 6) {
                 studentInfo.setThinkingAbility("良");
-            }else {
+            } else {
                 studentInfo.setThinkingAbility("中");
             }
         }
 
         Result<Integer> result = new Result<>();
-        if (studentInfo.getStuName() == null) {
+        if (Objects.equals(studentInfo.getStuName(), "")) {
             result.setData(0);
             result.setCode(401);
             result.setStatus(false);
             result.setMessage("名字不能为空");
             return result;
         }
-        if (studentInfo.getStuNumber() == null) {
+        if (Objects.equals(studentInfo.getStuNumber(), "")) {
             result.setData(0);
             result.setCode(401);
             result.setStatus(false);
             result.setMessage("学号不能为空");
             return result;
         }
-        if (studentInfo.getTelephone() == null) {
+        if (Objects.equals(studentInfo.getTelephone(), "")) {
             result.setData(0);
             result.setCode(401);
             result.setStatus(false);
             result.setMessage("电话不能为空");
             return result;
         }
-        if (studentInfo.getAddress() == null) {
+        if (Objects.equals(studentInfo.getAddress(), "")) {
             result.setData(0);
             result.setCode(401);
             result.setStatus(false);
@@ -214,7 +214,7 @@ public class StudentInfoController {
             result.setData(studentInfoService.insertStudentInfo(studentInfo));
             result.setCode(200);
             result.setStatus(true);
-            result.setMessage("增加成功");
+            result.setMessage("提交成功");
             return result;
         } else {
             result.setData(0);
@@ -230,40 +230,280 @@ public class StudentInfoController {
      */
     @ResponseBody
     @GetMapping("/getFemaleProp")
-    List<Map<Object, Object>> getFemaleProp(){
+    List<Map<Object, Object>> getFemaleProp() {
         List<Map<Object, Object>> list = new ArrayList<>();
         Map<Object, Object> map = new HashMap<>();
-        map.put("name","女");
-        map.put("value",studentInfoService.getFemaleProp());
+        map.put("name", "女");
+        map.put("value", studentInfoService.getFemaleProp());
         list.add(map);
         return list;
     }
+
     /**
      * 获取男生性别比例
      */
     @ResponseBody
     @GetMapping("/getMaleProp")
-    List<Map<Object, Object>> getMaleProp(){
+    List<Map<Object, Object>> getMaleProp() {
         List<Map<Object, Object>> list = new ArrayList<>();
         Map<Object, Object> map = new HashMap<>();
-        map.put("name","男");
-        map.put("value",100-studentInfoService.getFemaleProp());
+        map.put("name", "男");
+        map.put("value", 100 - studentInfoService.getFemaleProp());
         list.add(map);
         return list;
     }
 
-
+    /**
+     * 学生各个年龄段比例
+     */
+    @ResponseBody
+    @GetMapping("getCountByAge")
+    List<HashMap<Object, Object>> getCountByAge() {
+        List<HashMap<Object, Object>> list = new ArrayList<>();
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("month", "16及以下");
+        map.put("value", studentInfoService.getCountByAge(0, 16));
+        map.put("name", "系列一");
+        list.add(map);
+        HashMap<Object, Object> map_1 = new HashMap<>();
+        map_1.put("month", "17~19");
+        map_1.put("value", studentInfoService.getCountByAge(17, 19));
+        map_1.put("name", "系列一");
+        list.add(map_1);
+        HashMap<Object, Object> map_2 = new HashMap<>();
+        map_2.put("month", "20~22");
+        map_2.put("value", studentInfoService.getCountByAge(20, 22));
+        map_2.put("name", "系列一");
+        list.add(map_2);
+        HashMap<Object, Object> map_3 = new HashMap<>();
+        map_3.put("month", "22及以上");
+        map_3.put("value", studentInfoService.getCountByAge(20, 99));
+        map_3.put("name", "系列一");
+        list.add(map_3);
+        return list;
+    }
 
     /**
      * 获取学生总人数
      */
     @ResponseBody
     @GetMapping("/getAllStudentCount")
-    List<Map<Object, Object>> getAllStudentCount(){
+    List<Map<Object, Object>> getAllStudentCount() {
         List<Map<Object, Object>> list = new ArrayList<>();
         Map<Object, Object> map = new HashMap<>();
-        map.put("value",studentInfoService.getAllStudentCount());
+        map.put("value", studentInfoService.getAllStudentCount());
         list.add(map);
         return list;
+    }
+
+
+    /**
+     * 得到学习能力的各种评分的人数
+     */
+    @ResponseBody
+    @GetMapping("/getStudentLearningAbility")
+    List<Map<Object, Object>> getStudentLearningAbility() {
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("value", studentInfoService.getLearningAbilityNumber("优"));
+        map.put("name", "学习能力优秀");
+        list.add(map);
+        System.out.println(list);
+        Map<Object, Object> map1 = new HashMap<>();
+        map1.put("value", studentInfoService.getLearningAbilityNumber("良"));
+        map1.put("name", "学习能力良好");
+        list.add(map1);
+        System.out.println(list);
+
+        Map<Object, Object> map2 = new HashMap<>();
+        map2.put("value", studentInfoService.getLearningAbilityNumber("中"));
+        map2.put("name", "学习能力及格");
+        list.add(map2);
+        return list;
+    }
+
+    /**
+     * 得到表达能力的各种评分的人数
+     */
+    @ResponseBody
+    @GetMapping("/getStudentExpressAbility")
+    List<Map<Object, Object>> getStudentExpressAbility() {
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("value", studentInfoService.getExpressAbilityNumber("优"));
+        map.put("name", "表达能力优秀");
+        list.add(map);
+        System.out.println(list);
+        Map<Object, Object> map1 = new HashMap<>();
+        map1.put("value", studentInfoService.getExpressAbilityNumber("良"));
+        map1.put("name", "表达能力良好");
+        list.add(map1);
+        System.out.println(list);
+
+        Map<Object, Object> map2 = new HashMap<>();
+        map2.put("value", studentInfoService.getExpressAbilityNumber("中"));
+        map2.put("name", "表达能力及格");
+        list.add(map2);
+        return list;
+    }
+
+    /**
+     * 得到思维能力的各种评分的人数
+     */
+    @ResponseBody
+    @GetMapping("/getStudentThinkingAbility")
+    List<Map<Object, Object>> getStudentThinkingAbility() {
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("value", studentInfoService.getThinkingAbilityNumber("优"));
+        map.put("name", "思维能力优秀");
+        list.add(map);
+        System.out.println(list);
+        Map<Object, Object> map1 = new HashMap<>();
+        map1.put("value", studentInfoService.getThinkingAbilityNumber("良"));
+        map1.put("name", "思维能力良好");
+        list.add(map1);
+        System.out.println(list);
+
+        Map<Object, Object> map2 = new HashMap<>();
+        map2.put("value", studentInfoService.getThinkingAbilityNumber("中"));
+        map2.put("name", "思维能力及格");
+        list.add(map2);
+        return list;
+    }
+
+    /***
+     *   得到执行能力各种评分的人数
+     */
+    @ResponseBody
+    @GetMapping("/getStudentExecuteAbilityNumber")
+    List<Map<Object, Object>> getStudentExecuteAbilityNumber() {
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("value", studentInfoService.getExecuteAbilityNumber("优"));
+        map.put("name", "执行能力优秀");
+        list.add(map);
+        System.out.println(list);
+        Map<Object, Object> map1 = new HashMap<>();
+        map1.put("value", studentInfoService.getExecuteAbilityNumber("良"));
+        map1.put("name", "执行能力良好");
+        list.add(map1);
+        System.out.println(list);
+
+        Map<Object, Object> map2 = new HashMap<>();
+        map2.put("value", studentInfoService.getExecuteAbilityNumber("中"));
+        map2.put("name", "执行能力及格");
+        list.add(map2);
+        return list;
+    }
+
+    /**
+     * 返回 已报名人的省份分布和这个省份已报名的人数 比如：
+     * {
+     * "姓名": "重庆市",
+     * "人数": 6
+     * },
+     */
+    @ResponseBody
+    @GetMapping("/getAddressNumber")
+    List<Map<Object, Object>> getAddressNumber() {
+        List<Map<Object, Object>> list = new ArrayList<>();
+        List<String> stringList = new ArrayList<>();
+        List<Integer> integerList;
+        List<StudentInfoEntity> studentInfo;
+        String address;
+        studentInfo = studentInfoService.getAllStudentInfo();
+        for (int i = 0; i < studentInfo.size(); i++) {
+            address = "";
+            for (int j = 0; j < studentInfo.get(i).getAddress().length(); j++) {
+                address = address + studentInfo.get(i).getAddress().charAt(j);
+                if (studentInfo.get(i).getAddress().charAt(j) == '省' || studentInfo.get(i).getAddress().charAt(j) == '市' || studentInfo.get(i).getAddress().charAt(j) == '区') {
+                    if (stringList.size() == 0) {
+                        stringList.add(address);
+                        break;
+                    }
+                    for (int k = 0; k < stringList.size(); k++) {
+                        if (Objects.equals(stringList.get(k), address))
+                            break;
+                        if (k + 1 == stringList.size()) {
+                            stringList.add(address);
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+
+            }
+        }
+        integerList = studentInfoService.getStudentAddressNumber(stringList);
+        for (int i = 0; i < integerList.size(); i++) {
+            Map<Object, Object> map = new HashMap<>();
+            map.put("人数", integerList.get(i));
+            map.put("地址", stringList.get(i));
+            list.add(map);
+        }
+        return list;
+    }
+
+    /**
+     * 地图用的数据，返回地名和经纬度和人数 例如
+     * "name": "北京市",
+     * "value": [
+     * 116.4133836971231,
+     * 39.910924547299565,
+     * 9
+     * ]
+     */
+    @ResponseBody
+    @GetMapping("/getPoint")
+    List<Map<Object, Object>> getPoint() {
+        List<Map<Object, Object>> last = new ArrayList<>();
+        List<Point> list = new ArrayList<>();
+        List<String> stringList = new ArrayList<>();
+        List<Integer> integerList;
+        List<StudentInfoEntity> studentInfo;
+        String address;
+        studentInfo = studentInfoService.getAllStudentInfo();
+        for (int i = 0; i < studentInfo.size(); i++) {
+            address = "";
+            for (int j = 0; j < studentInfo.get(i).getAddress().length(); j++) {
+                address = address + studentInfo.get(i).getAddress().charAt(j);
+                if (studentInfo.get(i).getAddress().charAt(j) == '省' || studentInfo.get(i).getAddress().charAt(j) == '市' || studentInfo.get(i).getAddress().charAt(j) == '区') {
+                    if (stringList.size() == 0) {
+                        stringList.add(address);
+                        break;
+                    }
+                    for (int k = 0; k < stringList.size(); k++) {
+                        if (Objects.equals(stringList.get(k), address))
+                            break;
+                        if (k + 1 == stringList.size()) {
+                            stringList.add(address);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < stringList.size(); i++) {
+            list.add(i, DistanceUtil.getPoint(stringList.get(i)));
+        }
+        integerList = studentInfoService.getStudentAddressNumber(stringList);
+        List<List<Number>> test = new ArrayList<>();
+        for (int i = 0; i < integerList.size(); i++) {
+            List<Number> three = new ArrayList<>();
+            three.add(list.get(i).getLng());
+            three.add(list.get(i).getLat());
+            three.add(integerList.get(i));
+            test.add(i, three);
+        }
+        for (int i = 0; i < integerList.size(); i++) {
+            Map<Object, Object> map = new HashMap<>();
+            map.put("name", stringList.get(i));
+            map.put("value", test.get(i));
+            last.add(map);
+        }
+        return last;
     }
 }

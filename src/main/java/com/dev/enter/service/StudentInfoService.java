@@ -42,4 +42,27 @@ public interface StudentInfoService extends IService<StudentInfoEntity> {
       * 获取学生总人数
       */
      int getAllStudentCount();
+
+     /**
+      * 得到学习能力为参数的学生的数量
+      */
+     int getLearningAbilityNumber( String learningAbility);
+
+     /**
+      * 得到表达能力为参数的学生的数量
+      */
+     int getExpressAbilityNumber( String expressAbility);
+     /**
+      * 得到逻辑思维为参数的学生的数量
+      */
+     int getThinkingAbilityNumber( String expressAbility);
+
+     /**
+      * 得到执行能力评价为参数的学生的数量
+      */
+     int getExecuteAbilityNumber( String executeAbility);
+     /**
+      * 输入已报名人的所有的省份，统计所有在对应省份里面的人数
+      */
+     List<Integer> getStudentAddressNumber(List<String> Address);
 }
