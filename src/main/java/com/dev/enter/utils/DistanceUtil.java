@@ -25,7 +25,7 @@ public class DistanceUtil {
      */
     public static Point getPoint(String address) {
         //配置上自己的百度地图应用的AK
-        String applicationId = "6demko5GMTYMabNyxpWDWrMWKtkAnsDb";
+        String applicationId = "OazKtzxhMVQ7QOfAmTwuKZDbKS3M2qRm";
         try {
             InputStream urlStream;
             URL url = new URL("https://api.map.baidu.com/geocoding/v3/?address=" + address + "&output=json&ak=" + applicationId + "&callback=showLocation");
