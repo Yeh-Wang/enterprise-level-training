@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @since 2023-02-28 10:59:36
@@ -17,16 +17,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/audit-table-entity")
 public class AuditTableController {
     private AuditTableService auditTableService;
+
     @Autowired
-    public void setAuditTableService(AuditTableService auditTableService){
-        this.auditTableService=auditTableService;
+    public void setAuditTableService(AuditTableService auditTableService) {
+        this.auditTableService = auditTableService;
     }
+
     @ResponseBody
     @GetMapping("/find-audit-table-by-id/{id}")
-    Result<AuditTableEntity > findAuditTableByid(@PathVariable int id) {
-        Result<AuditTableEntity > result = new Result<>();
+    Result<AuditTableEntity> findAuditTableByid(@PathVariable int id) {
+        Result<AuditTableEntity> result = new Result<>();
         if (auditTableService.findAuditTableByid((id)) != null) {
-            result.setData(auditTableService.findAuditTableByid(id) );
+            result.setData(auditTableService.findAuditTableByid(id));
             result.setCode(200);
             result.setStatus(true);
             result.setMessage("查找成功！");
@@ -38,11 +40,12 @@ public class AuditTableController {
         }
         return result;
     }
+
     @GetMapping("/delete-Audit-table-By-Id/{id}")
     Result<Integer> deleteAuditTableByid(@PathVariable int id) {
         Result<Integer> result = new Result<>();
-        if (auditTableService.deleteAuditTableByid(id) ==1 ) {
-            result.setData(auditTableService.deleteAuditTableByid(id) );
+        if (auditTableService.deleteAuditTableByid(id) == 1) {
+            result.setData(auditTableService.deleteAuditTableByid(id));
             result.setMessage("删除成功");
             result.setStatus(true);
             result.setCode(200);
@@ -57,9 +60,9 @@ public class AuditTableController {
 
     @ResponseBody
     @PostMapping("/update-audit-table")
-    Result<String> updateQuestion(@RequestBody AuditTableEntity auditTableEntity ) {
+    Result<String> updateQuestion(@RequestBody AuditTableEntity auditTableEntity) {
         Result<String> result = new Result<>();
-        if (auditTableService.updateAuditTable(auditTableEntity ) == 1) {
+        if (auditTableService.updateAuditTable(auditTableEntity) == 1) {
             result.setData("Update successfully");
             result.setCode(200);
             result.setMessage("OK");
@@ -72,16 +75,16 @@ public class AuditTableController {
         }
         return result;
     }
+
     @PostMapping("/insertAuditTable")
-    Result<Integer> insertAuditTable(@RequestBody AuditTableEntity auditTableEntity){
-        System.out.println(auditTableEntity);
+    Result<Integer> insertAuditTable(@RequestBody AuditTableEntity auditTableEntity) {
         Result<Integer> result1 = new Result<>();
-        if (auditTableService.insertAuditTable(auditTableEntity)==1){
+        if (auditTableService.insertAuditTable(auditTableEntity) == 1) {
             result1.setData(1);
             result1.setCode(200);
             result1.setMessage("OK");
             result1.setStatus(true);
-        }else {
+        } else {
             result1.setData(0);
             result1.setCode(404);
             result1.setMessage("fail");
@@ -89,4 +92,22 @@ public class AuditTableController {
         }
         return result1;
     }
+
+    @GetMapping("/changePermissionById/{id},{administratorId}")
+    Result<Integer> changePermissionById(@PathVariable String id, @PathVariable String administratorId) {
+        Result<Integer> result = new Result<>();
+        if (auditTableService.changePermissionById(id, administratorId) == 1) {
+            result.setData(1);
+            result.setCode(200);
+            result.setMessage("已批准");
+            result.setStatus(true);
+        } else {
+            result.setData(0);
+            result.setCode(404);
+            result.setMessage("fail");
+            result.setStatus(false);
+        }
+        return result;
+    }
+
 }

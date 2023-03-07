@@ -2,7 +2,9 @@ package com.dev.enter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dev.enter.entity.AuditTableEntity;
+import com.dev.enter.entity.StudentInfoEntity;
 import com.dev.enter.mapper.AuditTableMapper;
+import com.dev.enter.mapper.StudentInfoMapper;
 import com.dev.enter.service.AuditTableService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @since 2023-02-28 10:59:36
@@ -19,9 +21,16 @@ import org.springframework.stereotype.Service;
 public class AuditTableServiceImpl extends ServiceImpl<AuditTableMapper, AuditTableEntity> implements AuditTableService {
     private AuditTableMapper auditTableMapper;
 
+    private StudentInfoMapper studentInfoMapper;
+
     @Autowired
     public void setAuditTableMapper(AuditTableMapper auditTableMapper) {
         this.auditTableMapper = auditTableMapper;
+    }
+
+    @Autowired
+    public void setStudentInfoMapper(StudentInfoMapper studentInfoMapper) {
+        this.studentInfoMapper = studentInfoMapper;
     }
 
     @Override
@@ -29,19 +38,35 @@ public class AuditTableServiceImpl extends ServiceImpl<AuditTableMapper, AuditTa
         return auditTableMapper.insert(auditTableEntity);
 
     }
+
     @Override
-    public AuditTableEntity findAuditTableByid(Integer  id){
-        return auditTableMapper.selectOne(new QueryWrapper<AuditTableEntity>().eq("id",id));
+    public AuditTableEntity findAuditTableByid(Integer id) {
+        return auditTableMapper.selectOne(new QueryWrapper<AuditTableEntity>().eq("id", id));
     }
+
     @Override
-    public int deleteAuditTableByid(Integer id){
+    public int deleteAuditTableByid(Integer id) {
         return auditTableMapper.deleteById(id);
 
 
     }
+
     @Override
-    public int updateAuditTable(AuditTableEntity auditTableEntity){
-        return auditTableMapper.updateById(auditTableEntity );
+    public int updateAuditTable(AuditTableEntity auditTableEntity) {
+        return auditTableMapper.updateById(auditTableEntity);
+    }
+
+    //通过申请，将result修改为“已通过”，以及将stuInfo的permission改为1
+    @Override
+    public int changePermissionById(String id, String administratorId) {
+        AuditTableEntity auditTableEntity = auditTableMapper.selectById(id);
+        auditTableEntity.setAuditor(administratorId);
+        auditTableEntity.setResult("已通过");
+        auditTableMapper.updateById(auditTableEntity);
+        StudentInfoEntity studentInfo = studentInfoMapper.selectById(auditTableEntity.getApplicant());
+        studentInfo.setPermissions(1);
+        studentInfoMapper.updateById(studentInfo);
+        return 1;
     }
 
 }
