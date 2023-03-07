@@ -2,6 +2,7 @@ package com.dev.enter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dev.enter.entity.AuditTableEntity;
+import com.dev.enter.entity.MailInfo;
 import com.dev.enter.entity.StudentInfoEntity;
 import com.dev.enter.mapper.AuditTableMapper;
 import com.dev.enter.mapper.StudentInfoMapper;
@@ -22,6 +23,13 @@ public class AuditTableServiceImpl extends ServiceImpl<AuditTableMapper, AuditTa
     private AuditTableMapper auditTableMapper;
 
     private StudentInfoMapper studentInfoMapper;
+
+    private SendMessageServiceImpl sendMessageService;
+
+    @Autowired
+    public void setSendMessageService(SendMessageServiceImpl sendMessageService){
+        this.sendMessageService = sendMessageService;
+    }
 
     @Autowired
     public void setAuditTableMapper(AuditTableMapper auditTableMapper) {
@@ -56,7 +64,9 @@ public class AuditTableServiceImpl extends ServiceImpl<AuditTableMapper, AuditTa
         return auditTableMapper.updateById(auditTableEntity);
     }
 
-    //通过申请，将result修改为“已通过”，以及将stuInfo的permission改为1
+    /**
+     * 通过申请，将result修改为“已通过”，以及将stuInfo的permission改为1
+     */
     @Override
     public int changePermissionById(String id, String administratorId) {
         AuditTableEntity auditTableEntity = auditTableMapper.selectById(id);
@@ -66,6 +76,12 @@ public class AuditTableServiceImpl extends ServiceImpl<AuditTableMapper, AuditTa
         StudentInfoEntity studentInfo = studentInfoMapper.selectById(auditTableEntity.getApplicant());
         studentInfo.setPermissions(1);
         studentInfoMapper.updateById(studentInfo);
+        MailInfo mailInfo = new MailInfo();
+        String[] str = new String[]{auditTableEntity.getContact()};
+        mailInfo.setReceiver(str);
+        mailInfo.setSubject("申请通过通知");
+        mailInfo.setContent("您提交的申请已经通过，如果您想修改自己的信息请点击下方链接进入修改。\n http://1.15.62.89/update \n 祝您生活愉快！");
+        sendMessageService.sendSimpleTextEmail(mailInfo);
         return 1;
     }
 

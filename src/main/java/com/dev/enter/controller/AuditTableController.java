@@ -3,6 +3,7 @@ package com.dev.enter.controller;
 import com.dev.enter.entity.AuditTableEntity;
 import com.dev.enter.entity.Result;
 import com.dev.enter.service.AuditTableService;
+import com.dev.enter.service.impl.SendMessageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -101,6 +102,7 @@ public class AuditTableController {
             result.setCode(200);
             result.setMessage("已批准");
             result.setStatus(true);
+
         } else {
             result.setData(0);
             result.setCode(404);
