@@ -115,12 +115,34 @@ public class StudentInfoController {
     }
 
     /**
-     * 更新学生的信息
+     * 管理员更新学生的信息
      */
     @ResponseBody
     @PostMapping("/updateStudent")
     Result<Integer> updateStudent(@RequestBody StudentInfoEntity studentInfo) {
         Result<Integer> result = new Result<>();
+        if (studentInfoService.updateStudent(studentInfo) == 1) {
+            result.setData(studentInfoService.updateStudent(studentInfo));
+            result.setMessage("更新成功");
+            result.setStatus(true);
+            result.setCode(200);
+        } else {
+            result.setCode(404);
+            result.setStatus(false);
+            result.setMessage("更新失败");
+            result.setData(0);
+        }
+        return result;
+    }
+
+    /**
+     * 学生修改信息
+     */
+    @ResponseBody
+    @PostMapping("/updateSelfInfo")
+    Result<Integer> updateSelfInfo(@RequestBody StudentInfoEntity studentInfo) {
+        Result<Integer> result = new Result<>();
+        studentInfo.setPermissions(0);
         if (studentInfoService.updateStudent(studentInfo) == 1) {
             result.setData(studentInfoService.updateStudent(studentInfo));
             result.setMessage("更新成功");
