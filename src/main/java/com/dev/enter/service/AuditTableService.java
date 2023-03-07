@@ -21,5 +21,5 @@ public interface AuditTableService extends IService<AuditTableEntity> {
    int deleteAuditTableByid(Integer id);
    int updateAuditTable(AuditTableEntity auditTableEntity);
 
-   int changePermissionById(String id,String administratorId);
+   int changePermissionById(int id,String administratorId);
 }

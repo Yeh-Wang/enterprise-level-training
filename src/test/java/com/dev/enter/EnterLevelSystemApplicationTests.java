@@ -3,6 +3,7 @@ package com.dev.enter;
 import com.dev.enter.entity.MailInfo;
 import com.dev.enter.mapper.AdministratorMapper;
 import com.dev.enter.mapper.QuestionSourceMapper;
+import com.dev.enter.service.impl.AuditTableServiceImpl;
 import com.dev.enter.service.impl.QuestionSourceServiceImpl;
 import com.dev.enter.service.impl.SendMessageServiceImpl;
 import com.dev.enter.service.impl.StudentInfoServiceImpl;
@@ -33,6 +34,9 @@ class EnterLevelSystemApplicationTests {
     @Autowired
     SendMessageServiceImpl sendMessageService;
 
+    @Autowired
+    AuditTableServiceImpl auditTableService;
+
     @Test
     void contextLoads() {
     }
@@ -41,11 +45,12 @@ class EnterLevelSystemApplicationTests {
     void test(){
 //        System.out.println(studentInfoService.getFemaleProp());
 //        System.out.println(studentInfoService.getMaleProp());
-        MailInfo mailInfo = new MailInfo();
-        mailInfo.setReceiver(new String[]{"1627082750@qq.com"});
-        mailInfo.setSubject("修改通知");
-        mailInfo.setContent("http://1.15.62.89/about");
-        sendMessageService.sendSimpleTextEmail(mailInfo);
+//        MailInfo mailInfo = new MailInfo();
+//        mailInfo.setReceiver(new String[]{"1627082750@qq.com"});
+//        mailInfo.setSubject("修改通知");
+//        mailInfo.setContent("http://1.15.62.89/about");
+//        sendMessageService.sendSimpleTextEmail(mailInfo);
+        auditTableService.changePermissionById(9,"3acb25b7-851b-412f-a2e0-59109eba91e9");
     }
 
 }

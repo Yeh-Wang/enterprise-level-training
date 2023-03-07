@@ -68,7 +68,7 @@ public class AuditTableServiceImpl extends ServiceImpl<AuditTableMapper, AuditTa
      * 通过申请，将result修改为“已通过”，以及将stuInfo的permission改为1
      */
     @Override
-    public int changePermissionById(String id, String administratorId) {
+    public int changePermissionById(int id, String administratorId) {
         AuditTableEntity auditTableEntity = auditTableMapper.selectById(id);
         auditTableEntity.setAuditor(administratorId);
         auditTableEntity.setResult("已通过");
@@ -77,8 +77,8 @@ public class AuditTableServiceImpl extends ServiceImpl<AuditTableMapper, AuditTa
         studentInfo.setPermissions(1);
         studentInfoMapper.updateById(studentInfo);
         MailInfo mailInfo = new MailInfo();
-        String[] str = new String[]{auditTableEntity.getContact()};
-        mailInfo.setReceiver(str);
+        mailInfo.setReceiver(new String[]{auditTableEntity.getContact()});
+        System.out.println(auditTableEntity.getContact());
         mailInfo.setSubject("申请通过通知");
         mailInfo.setContent("您提交的申请已经通过，如果您想修改自己的信息请点击下方链接进入修改。\n http://1.15.62.89/update \n 祝您生活愉快！");
         sendMessageService.sendSimpleTextEmail(mailInfo);

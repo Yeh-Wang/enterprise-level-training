@@ -95,7 +95,7 @@ public class AuditTableController {
     }
 
     @GetMapping("/changePermissionById/{id},{administratorId}")
-    Result<Integer> changePermissionById(@PathVariable String id, @PathVariable String administratorId) {
+    Result<Integer> changePermissionById(@PathVariable int id, @PathVariable String administratorId) {
         Result<Integer> result = new Result<>();
         if (auditTableService.changePermissionById(id, administratorId) == 1) {
             result.setData(1);
