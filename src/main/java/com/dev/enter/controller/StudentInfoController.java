@@ -135,6 +135,9 @@ public class StudentInfoController {
         return result;
     }
 
+    /**
+     * 添加一个学生信息
+     */
     @ResponseBody
     @PostMapping("/insertStudentInfo")
     Result<Integer> insertStudentInfo(@RequestBody StudentInfoEntity studentInfo) {
