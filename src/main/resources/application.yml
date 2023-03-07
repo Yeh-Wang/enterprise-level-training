@@ -9,11 +9,11 @@ spring:
     password: 256817
     type: com.alibaba.druid.pool.DruidDataSource
   mail:
-    host: smtp.163.com
+    host: smtp.qq.com
     # 发送者的邮箱账号
-    username: wyx1627082750@163.com
+    username: 2032340558@qq.com
     # 邮箱密码授权码
-    password: NKPWNKROEOHMYXDB
+    password: suajvurtgkssddjj
     default-encoding: utf-8
     properties:
       mail:
