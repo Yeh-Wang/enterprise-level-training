@@ -36,5 +36,7 @@ public class AuditTableEntity {
     @TableField("result")
     private String result;
 
+    @TableField("contact")
+    private String contact;
 
 }
