@@ -74,6 +74,7 @@ public class AuditTableController {
     }
     @PostMapping("/insertAuditTable")
     Result<Integer> insertAuditTable(@RequestBody AuditTableEntity auditTableEntity){
+        System.out.println(auditTableEntity);
         Result<Integer> result1 = new Result<>();
         if (auditTableService.insertAuditTable(auditTableEntity)==1){
             result1.setData(1);
