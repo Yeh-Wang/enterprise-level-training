@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,14 +75,16 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
     public double getFemaleProp() {
         List<StudentInfoEntity> list = studentInfoMapper.selectList(new QueryWrapper<StudentInfoEntity>().eq("sex","女"));
         List<StudentInfoEntity> list_all = studentInfoMapper.selectList(null);
-        return ((list.size()*1.00/list_all.size())*100);
+        DecimalFormat df = new DecimalFormat("#.00");
+        return (Double.parseDouble(df.format((list.size()*1.00/list_all.size())*100)));
     }
 
     @Override
     public double getMaleProp() {
         List<StudentInfoEntity> list = studentInfoMapper.selectList(new QueryWrapper<StudentInfoEntity>().eq("sex","男"));
         List<StudentInfoEntity> list_all = studentInfoMapper.selectList(null);
-        return (float) ((list.size()*1.00/list_all.size())*100);
+        DecimalFormat df = new DecimalFormat("#.0");
+        return (Double.parseDouble(df.format((list.size()*1.00/list_all.size())*100)));
     }
 
     @Override

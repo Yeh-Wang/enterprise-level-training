@@ -338,8 +338,6 @@ public class StudentInfoController {
         map1.put("value", studentInfoService.getLearningAbilityNumber("良"));
         map1.put("name", "学习能力良好");
         list.add(map1);
-        System.out.println(list);
-
         Map<Object, Object> map2 = new HashMap<>();
         map2.put("value", studentInfoService.getLearningAbilityNumber("中"));
         map2.put("name", "学习能力及格");
@@ -363,8 +361,6 @@ public class StudentInfoController {
         map1.put("value", studentInfoService.getExpressAbilityNumber("良"));
         map1.put("name", "表达能力良好");
         list.add(map1);
-        System.out.println(list);
-
         Map<Object, Object> map2 = new HashMap<>();
         map2.put("value", studentInfoService.getExpressAbilityNumber("中"));
         map2.put("name", "表达能力及格");
@@ -388,8 +384,6 @@ public class StudentInfoController {
         map1.put("value", studentInfoService.getThinkingAbilityNumber("良"));
         map1.put("name", "思维能力良好");
         list.add(map1);
-        System.out.println(list);
-
         Map<Object, Object> map2 = new HashMap<>();
         map2.put("value", studentInfoService.getThinkingAbilityNumber("中"));
         map2.put("name", "思维能力及格");
@@ -413,8 +407,6 @@ public class StudentInfoController {
         map1.put("value", studentInfoService.getExecuteAbilityNumber("良"));
         map1.put("name", "执行能力良好");
         list.add(map1);
-        System.out.println(list);
-
         Map<Object, Object> map2 = new HashMap<>();
         map2.put("value", studentInfoService.getExecuteAbilityNumber("中"));
         map2.put("name", "执行能力及格");
@@ -455,7 +447,6 @@ public class StudentInfoController {
                             break;
                         }
                     }
-
                     break;
                 }
 
