@@ -17,12 +17,20 @@ spring:
     default-encoding: utf-8
     properties:
       mail:
-        debug: true
+#        debug: true
         smtp:
+          ssl:
+            enable: true
+            trust: smtp.qq.com
           auth: true
           starttls:
             enable: true
             required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
+    port: 465
+    protocol: smtp
 
 
 mybatis-plus:
