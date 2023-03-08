@@ -266,6 +266,24 @@ public class StudentInfoController {
     }
 
     /**
+     * 获取男女生人数
+     */
+    @ResponseBody
+    @GetMapping("/getFemaleMaleCount")
+    List<Map<Object, Object>> getFemaleMaleCount(){
+        List<Map<Object, Object>> list = new ArrayList<>();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("name","女");
+        map.put("value",studentInfoService.getFemaleProp());
+        list.add(map);
+        Map<Object, Object> map1 = new HashMap<>();
+        map1.put("name","男");
+        map1.put("value",100-studentInfoService.getFemaleProp());
+        list.add(map1);
+        return list;
+    }
+
+    /**
      * 获取男生性别比例
      */
     @ResponseBody
