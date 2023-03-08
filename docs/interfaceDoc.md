@@ -779,4 +779,64 @@ Post /audit-table-entity/updateAuditTable
   "auditor":"973309d4-3b23-4bed-a436-f4ceffdf1573",
   "reasonContent":"fgsdg",
   "result":"dgs"}}
+```  
+  
+***  
+### 点击通过按钮通过申请    
+Get/audit-table-entity/changePermissionById/{{id}},{{administratorId}}  
+
+#### 通过申请，将result修改为“已通过”，以及将stuInfo的permission改为1  
+> 请求参数  
+
+| 名称              | 类型     | 必选   | 说明     |
+|-----------------|--------|------|--------|
+| id              | int    | true | 审核表的id |
+| administratorId | String | true | 管理员的ID |  
+  
+> 返回数据结构  
+
+| 名称      | 类型      | 必选   | 说明         |
+|---------|---------|------|------------|
+| message | string  | ---- | -------    |
+| status  | boolean | ---- | 成功         |
+| code    | int     | ---- | 状态码        |
+| data    | int     | ---- | 1为成功,0为不成功 |  
+  
+> 返回示例  
+
+```json
+{
+  "message": "已批准",
+  "status": true,
+  "code": 200,
+  "data": 1
+}
+```  
+***    
+### 发送邮件
+Get/audit-table-entity/sendEmailToUser/{{id}}  
+> 请求参数
+
+| 名称              | 类型     | 必选   | 说明     |
+|-----------------|--------|------|--------|
+| id              | int    | true | 审核表的id |   
+
+> 返回数据结构
+
+| 名称      | 类型      | 必选   | 说明      |
+|---------|---------|------|---------|
+| message | string  | ---- | ------- |
+| status  | boolean | ---- | 成功      |
+| code    | int     | ---- | 状态码     |
+| data    | string  | ---- | ---     |  
+
+> 返回示例
+
+```json
+{
+  "message": "successful",
+  "status": true,
+  "code": 200,
+  "data": "successful"
+}
 ```
