@@ -17,6 +17,7 @@ import java.util.UUID;
  * @since 2023-02-28 10:59:36
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/question-source-entity")
 public class QuestionSourceController {
 

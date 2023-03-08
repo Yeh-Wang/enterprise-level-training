@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.SpringVersion;
 
 import java.util.UUID;
 
@@ -50,7 +51,9 @@ class EnterLevelSystemApplicationTests {
 //        mailInfo.setSubject("修改通知");
 //        mailInfo.setContent("http://1.15.62.89/about");
 //        sendMessageService.sendSimpleTextEmail(mailInfo);
-        auditTableService.changePermissionById(9,"3acb25b7-851b-412f-a2e0-59109eba91e9");
+//        auditTableService.changePermissionById(9,"3acb25b7-851b-412f-a2e0-59109eba91e9");
+    String version = SpringVersion.getVersion();
+    System.out.println(version);
     }
 
 }

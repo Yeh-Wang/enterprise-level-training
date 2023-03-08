@@ -19,6 +19,7 @@ import java.util.*;
  * @since 2023-02-28 10:59:36
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/student-info-entity")
 public class StudentInfoController {
     private StudentInfoServiceImpl studentInfoService;

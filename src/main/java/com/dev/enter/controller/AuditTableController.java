@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2023-02-28 10:59:36
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/audit-table-entity")
 public class AuditTableController {
     private AuditTableService auditTableService;
