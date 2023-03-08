@@ -1,6 +1,7 @@
 package com.dev.enter.controller;
 
 import com.dev.enter.entity.AuditTableEntity;
+import com.dev.enter.entity.MailInfo;
 import com.dev.enter.entity.Result;
 import com.dev.enter.service.AuditTableService;
 import com.dev.enter.service.impl.SendMessageServiceImpl;
@@ -19,6 +20,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/audit-table-entity")
 public class AuditTableController {
     private AuditTableService auditTableService;
+
+    private SendMessageServiceImpl sendMessageService;
+
+    @Autowired
+    public void setSendMessageService(SendMessageServiceImpl sendMessageService){
+        this.sendMessageService = sendMessageService;
+    }
 
     @Autowired
     public void setAuditTableService(AuditTableService auditTableService) {
@@ -113,4 +121,24 @@ public class AuditTableController {
         return result;
     }
 
+    /**
+     * 发送邮件
+     */
+    @ResponseBody
+    @GetMapping("/sendEmailToUser/{id}")
+    Result<String> sendEmailToUser(@PathVariable int id){
+        Result<String> result = new Result<>();
+        AuditTableEntity auditTableEntity = auditTableService.findAuditTableByid(id);
+        MailInfo mailInfo = new MailInfo();
+        mailInfo.setReceiver(new String[]{auditTableEntity.getContact()});
+        System.out.println(auditTableEntity.getContact());
+        mailInfo.setSubject("申请通过通知");
+        mailInfo.setContent("您提交的申请已经通过，如果您想修改自己的信息请点击下方链接进入修改。\n http://1.15.62.89/update \n 祝您生活愉快！");
+        sendMessageService.sendSimpleTextEmail(mailInfo);
+        result.setData("successful");
+        result.setCode(200);
+        result.setMessage("successful");
+        result.setStatus(true);
+        return result;
+    }
 }
