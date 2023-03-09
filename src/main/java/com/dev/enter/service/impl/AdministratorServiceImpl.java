@@ -64,4 +64,11 @@ public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, A
         }
     }
 
+    @Override
+    public Integer modifyPassword(String id, String newPassword) {
+        AdministratorEntity administrator = administratorMapper.selectOne(new QueryWrapper<AdministratorEntity>().eq("id",id));
+        administrator.setUserPwd(newPassword);
+        return administratorMapper.updateById(administrator);
+    }
+
 }

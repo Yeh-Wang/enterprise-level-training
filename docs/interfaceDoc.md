@@ -643,8 +643,36 @@ Post/administrator-entity/modifyAdministratorInfo
   "code": 200,
   "data": "1"
 }
-``` 
+```   
+***  
+Get /administrator-entity/modifyPassword/{id},{newPassword}  
+### 管理员修改密码  
+#### 前端传来管理员的id和新修改的密码，验证旧密码是否正确在前端处理
+> 请求参数
+
+| 名称          | 类型     | 必选   | 说明     |
+|-------------|--------|------|--------|
+| id          | string | true | 管理员id  | 
+| newPassword | string | true | 修改的新密码 |   
   
+> 返回数据结构
+
+| 名称      | 类型     | 必选  | 说明       |
+|---------|--------|-----|----------|
+| message | string | --- | 修改密码提示信息 |
+| status  | Bool   | --- | 成功与否     |
+| code    | int    | --- | 状态码      |
+| data    | int    | --- | ---      |    
+  
+> 返回示例  
+```json
+{
+  "message": "修改成功",
+  "status": true,
+  "code": 200,
+  "data": 1
+}
+```   
 
 ## 申请审核表
 

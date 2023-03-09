@@ -26,4 +26,7 @@ public interface AdministratorService extends IService<AdministratorEntity> {
 
     int checkSameUsername(String username);
 
+    Integer modifyPassword(String id,String newPassword);
+
+
 }

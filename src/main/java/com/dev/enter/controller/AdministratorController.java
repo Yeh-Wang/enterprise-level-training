@@ -141,4 +141,21 @@ public class AdministratorController {
         }
     }
 
+    @GetMapping("/modifyPassword/{id},{newPassword}")
+    public Result<Integer> modifyPassword(@PathVariable String id, @PathVariable String newPassword){
+        Result<Integer> result = new Result<>();
+        if (administratorService.modifyPassword(id,newPassword)==1){
+            result.setData(1);
+            result.setMessage("修改成功");
+            result.setCode(200);
+            result.setStatus(true);
+        }else {
+            result.setData(0);
+            result.setMessage("修改失败");
+            result.setCode(404);
+            result.setStatus(false);
+        }
+        return result;
+    }
+
 }
