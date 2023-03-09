@@ -139,7 +139,6 @@ public class AuditTableController {
         StuToAuditorEntity auditorEntity = stuToAuditorMapper.selectById(id);
         MailInfo mailInfo = new MailInfo();
         mailInfo.setReceiver(new String[]{auditTableEntity.getContact()});
-        System.out.println(auditTableEntity.getContact());
         mailInfo.setSubject("申请通过通知");
         mailInfo.setContent("亲爱的"+auditorEntity.getApplicant()+"同学，"+"您提交的申请已经通过，如果您想修改自己的信息请点击下方链接进入修改。\n http://1.15.62.89/update \n 祝您生活愉快！");
         sendMessageService.sendSimpleTextEmail(mailInfo);
