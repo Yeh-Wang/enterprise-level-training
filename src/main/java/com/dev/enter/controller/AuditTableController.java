@@ -3,10 +3,14 @@ package com.dev.enter.controller;
 import com.dev.enter.entity.AuditTableEntity;
 import com.dev.enter.entity.MailInfo;
 import com.dev.enter.entity.Result;
+import com.dev.enter.entity.StuToAuditorEntity;
+import com.dev.enter.mapper.StuToAuditorMapper;
 import com.dev.enter.service.AuditTableService;
 import com.dev.enter.service.impl.SendMessageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -22,6 +26,9 @@ public class AuditTableController {
     private AuditTableService auditTableService;
 
     private SendMessageServiceImpl sendMessageService;
+
+    @Resource
+    private StuToAuditorMapper stuToAuditorMapper;
 
     @Autowired
     public void setSendMessageService(SendMessageServiceImpl sendMessageService){
@@ -129,11 +136,12 @@ public class AuditTableController {
     Result<String> sendEmailToUser(@PathVariable int id){
         Result<String> result = new Result<>();
         AuditTableEntity auditTableEntity = auditTableService.findAuditTableByid(id);
+        StuToAuditorEntity auditorEntity = stuToAuditorMapper.selectById(id);
         MailInfo mailInfo = new MailInfo();
         mailInfo.setReceiver(new String[]{auditTableEntity.getContact()});
         System.out.println(auditTableEntity.getContact());
         mailInfo.setSubject("申请通过通知");
-        mailInfo.setContent("您提交的申请已经通过，如果您想修改自己的信息请点击下方链接进入修改。\n http://1.15.62.89/update \n 祝您生活愉快！");
+        mailInfo.setContent("亲爱的"+auditorEntity.getApplicant()+"同学，"+"您提交的申请已经通过，如果您想修改自己的信息请点击下方链接进入修改。\n http://1.15.62.89/update \n 祝您生活愉快！");
         sendMessageService.sendSimpleTextEmail(mailInfo);
         result.setData("successful");
         result.setCode(200);

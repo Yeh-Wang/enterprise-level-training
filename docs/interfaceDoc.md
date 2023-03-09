@@ -12,8 +12,6 @@ post /student-info-entity/getAllStudentInfo
 |-----------|------|
 | token     | true |
 
-#### 返回数据类型
-
 | 名称      | 类型                 | 必选  | 说明     |
 |---------|--------------------|-----|--------|
 | code    | int                | --- | 状态码    |
@@ -22,8 +20,10 @@ post /student-info-entity/getAllStudentInfo
 | states  | boolean            | --- | 正确还是错误 |
 
 #### 返回示例
+
 成功示例
-````
+
+````  
 {
 "message": "查找成功！",
 "status": true,
