@@ -6,9 +6,11 @@ import com.dev.enter.entity.StudentInfoEntity;
 import com.dev.enter.mapper.StudentInfoMapper;
 import com.dev.enter.service.StudentInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dev.enter.utils.DistanceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,10 +23,12 @@ import java.util.List;
 @Service
 public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, StudentInfoEntity> implements StudentInfoService {
    private StudentInfoMapper studentInfoMapper;
+
    @Autowired
    public  void  setStudentInfoMapper(StudentInfoMapper studentInfoMapper)
    {
        this.studentInfoMapper=studentInfoMapper;
+
    }
 
     @Override
@@ -75,12 +79,64 @@ public class StudentInfoServiceImpl extends ServiceImpl<StudentInfoMapper, Stude
      * @return
      */
     @Override
-    public int getAverageLearningAbility(String learningAbility) {
+    public int getLearningAbilityNumber(String learningAbility) {
         int aNum;
         aNum=studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getLearningAbility,learningAbility)).size();
 
        return aNum;
     }
+    /**
+     * 得到评价学习能力为参数的人数
+     * @param expressAbility
+     * @return
+     */
+    @Override
+    public int getExpressAbilityNumber(String expressAbility) {
+        int aNum;
+        aNum=studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getExpressAbility,expressAbility)).size();
+
+        return aNum;
+    }
+    /**
+     * 得到评价学习能力为参数的人数
+     * @param thinkingAbility
+     * @return
+     */
+    @Override
+    public int getThinkingAbilityNumber(String thinkingAbility) {
+        int aNum;
+        aNum=studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getThinkingAbility,thinkingAbility)).size();
+
+        return aNum;
+    }
+    /**
+     * 得到评价执行能力为参数的人数
+     * @param executeAbility
+     * @return
+     */
+    @Override
+    public int getExecuteAbilityNumber(String executeAbility) {
+        int aNum;
+        aNum=studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().eq(StudentInfoEntity::getExecuteAbility,executeAbility)).size();
+
+        return aNum;
+    }
+
+    /**
+     * 输入已报名人的所有的省份，统计所有在对应省份里面的人数
+     * @param Address
+     * @return
+     */
+    @Override
+    public List<Integer> getStudentAddressNumber(List<String> Address) {
+       List<Integer> list = new ArrayList<>();
+       for (int i=0;i<Address.size();i++){
+           list.add(i,studentInfoMapper.selectList(Wrappers.<StudentInfoEntity>lambdaQuery().like(StudentInfoEntity::getAddress,Address.get(i))).size());
+       }
+
+       return list;
+    }
+
 
     @Override
     public double getFemaleProp() {
