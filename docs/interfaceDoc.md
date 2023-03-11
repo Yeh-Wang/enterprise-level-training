@@ -12,6 +12,8 @@ post /student-info-entity/getAllStudentInfo
 |-----------|------|
 | token     | true |
 
+#### 返回类型
+
 | 名称      | 类型                 | 必选  | 说明     |
 |---------|--------------------|-----|--------|
 | code    | int                | --- | 状态码    |
