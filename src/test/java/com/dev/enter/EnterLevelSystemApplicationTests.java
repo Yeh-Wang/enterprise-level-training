@@ -47,13 +47,13 @@ class EnterLevelSystemApplicationTests {
 //        System.out.println(studentInfoService.getFemaleProp());
 //        System.out.println(studentInfoService.getMaleProp());
 //        MailInfo mailInfo = new MailInfo();
-//        mailInfo.setReceiver(new String[]{"1627082750@qq.com"});
+//        mailInfo.setReceiver(new String[]{"1016248544@qq.com"});
 //        mailInfo.setSubject("修改通知");
-//        mailInfo.setContent("http://1.15.62.89/about");
+//        mailInfo.setContent("http://1.15.62.89/update");
 //        sendMessageService.sendSimpleTextEmail(mailInfo);
 //        auditTableService.changePermissionById(9,"3acb25b7-851b-412f-a2e0-59109eba91e9");
-    String version = SpringVersion.getVersion();
-    System.out.println(version);
+//    String version = SpringVersion.getVersion();
+//    System.out.println(version);
     }
 
 }
